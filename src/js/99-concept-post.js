@@ -15,7 +15,10 @@ function xAfterRender(){
   xObs.forEach(o=>o.disconnect()); xObs=[];
   clearTimeout(xTypeTimer);
   xNotesLayerClear();
+  x3dMounts.forEach(m=>m&&m.dispose()); x3dMounts=[];
   if(CURRENT==='home') xInitHome();
+  if(CURRENT==='category') x3dCategory();
+  if(CURRENT==='product') x3dProduct();
   if(document.body.classList.contains('x-annot')) setTimeout(xNotesLayerDraw,400);
 }
 
@@ -36,7 +39,7 @@ const xReduced = () => window.matchMedia && window.matchMedia('(prefers-reduced-
 function xInitHome(){
   // reveal on scroll
   const rv=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); rv.unobserve(en.target); } }),{rootMargin:'0px 0px -8% 0px',threshold:.08});
-  $$('#main [data-rv], #main .xh-term, #main .xh-dial').forEach(el=>rv.observe(el)); xObs.push(rv);
+  $$('#main [data-rv], #main .xh-list, #main .xh-dial').forEach(el=>rv.observe(el)); xObs.push(rv);
 
   // stats count-up
   const co=new IntersectionObserver(es=>es.forEach(en=>{ if(!en.isIntersecting) return; co.unobserve(en.target); xCount(en.target); }),{threshold:.6});
@@ -49,6 +52,40 @@ function xInitHome(){
   xHeroSearch();
   xIndustry();
   xDropZone();
+  x3dHome();
+}
+
+/* ---------- 3D viewers ---------- */
+let x3dMounts=[];
+function x3dMount(el,std){
+  if(typeof X3D==='undefined'||!X3D.ok||!el) return null;
+  const m=X3D.mount(el,std); if(!m) return null;
+  x3dMounts.push(m);
+  const fb=el.querySelector('.xh-3d-fallback'); if(fb) fb.hidden=true;
+  return m;
+}
+function x3dHome(){
+  const stage=$('#x3dstage'); if(!stage) return;
+  const m=x3dMount(stage,'933');
+  $$('#main [data-x3d]').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.x3d;
+    $$('#main [data-x3d]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    if(m) m.set(k); else { const fb=stage.querySelector('.xh-3d-fallback'); if(fb) fb.innerHTML=drawing(STANDARDS[k].kind,k,true); }
+    const info=$('#x3dinfo'); info.innerHTML=x3dInfo(k); translateDom(info);
+    track('view_3d',{standard:k});
+  }));
+}
+function x3dCategory(){
+  const art=$('#main .xs-art'); if(!art) return;
+  const slug=(location.hash.split('/')[2]||'').split('?')[0]; const std=STD_BY_SLUG[slug];
+  if(std && x3dMount(art,std)){ const svg=art.querySelector(':scope > svg'); if(svg) svg.style.display='none'; art.setAttribute('role','img'); art.setAttribute('aria-label',tr('3D-modell')+' '+STANDARDS[std].din); }
+}
+function x3dProduct(){
+  const sku=(location.hash.split('/')[2]||'').split('?')[0]; const p=BY_SKU[sku]; const d=$('#main .drawing');
+  if(!p||!d||typeof X3D==='undefined'||!X3D.ok) return;
+  const box=document.createElement('div'); box.className='x3d-prod'; box.setAttribute('role','img'); box.setAttribute('aria-label',tr('3D-modell')+' '+p.label);
+  box.innerHTML=`<span class="xh-3d-hint">${XI.rotate}<span>${esc(tr('Dra for å rotere'))}</span></span>`;
+  d.insertAdjacentElement('afterend',box); x3dMount(box,p.std);
 }
 
 function xCount(el){
