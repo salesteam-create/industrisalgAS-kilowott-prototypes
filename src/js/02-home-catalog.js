@@ -238,7 +238,10 @@ function viewCategory(slug){
   if(!items.length) return `<div class="wrap"><div class="crumbs">${crumbHtml}</div><h1>${esc(title)}</h1>${emptyStateNoData(cat)}</div>`;
   return `<div class="wrap">
     <div class="crumbs">${crumbHtml}</div>
-    ${std?`<div class="kicker" data-fix="K4">Produkt · ${items.length} varianter</div>`:''}<h1>${esc(title)}</h1>${intro?`<p class="muted" style="max-width:70ch">${esc(intro)}</p>`:''}
+    ${std?`<div class="xs-head" data-note="C1"><div><div class="kicker" data-fix="K4">Produkt · ${items.length} varianter</div><h1>${esc(title)}</h1>${intro?`<p class="muted" style="max-width:70ch;margin:0">${esc(intro)}</p>`:''}
+      <ul class="xs-facts"><li class="ok"><b>${fmtInt(items.filter(p=>p.stock>0).length)}</b> på lager nå</li><li><b>${STANDARDS[std].mats.length}</b> materialer</li>${STANDARDS[std].iso?`<li>Tilsvarer <b>${esc(STANDARDS[std].iso)}</b></li>`:''}<li>Ned til <b>1 stk</b></li><li><b>2.1</b> / <b>3.1</b> sertifikat</li></ul></div>
+      <div class="xs-art" aria-hidden="true">${drawing(STANDARDS[std].kind,std,true)}</div></div>`
+    :`<h1>${esc(title)}</h1>${intro?`<p class="muted" style="max-width:70ch">${esc(intro)}</p>`:''}`}
     ${subs}
     <div class="catlayout" id="catlayout">${filterPanel(items,UI.f)}<div id="results">${resultsBlock(items,UI.f)}</div></div>
   </div>`;

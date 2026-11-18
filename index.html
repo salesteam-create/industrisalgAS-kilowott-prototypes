@@ -1488,6 +1488,254 @@ body.x-home:not(.x-hero-out) .x-ql { display: flex; align-items: center; gap: 6p
 .xf-mark { font-size: clamp(2.2rem, 11.4vw, 13rem); }
 @media (max-width: 480px) { .hactions a[href="#/konto/lister"] { display: none; } .hactions .hbtn { padding-left: 6px; padding-right: 6px; } }
 
+/* =====================================================================
+   INDUSTRISALG 2.0 CONCEPT · Inner pages
+   Category, search, product, basket, quick order, special, account,
+   industry, contact, confirmation. Same dark steel system as the
+   homepage; tables read like a technical data sheet.
+   ===================================================================== */
+
+body { background: var(--x-n950); }
+#main, .drawer, .mbar, .filters {
+  --bg: var(--x-n900); --surface: var(--x-n850); --surface-2: #16295a; --line: var(--x-line-2);
+  --text: var(--x-fg); --muted: var(--x-mute); --link: var(--x-or-2);
+  --ok: var(--x-ok); --warn: #f5b25b; --danger: #ff8a7a;
+  --accent: var(--x-or); --accent-ink: var(--x-or-ink);
+  --brand: #9fb8f0; --strip-ink: var(--x-or-2); --placeholder: #6f7d9c; --radius: 8px;
+}
+body:not(.x-home) #main { background: var(--x-n950); color: var(--x-fg); padding-bottom: 24px; }
+body:not(.x-home) #main::before { content: ""; position: absolute; left: 0; right: 0; height: 420px; pointer-events: none; z-index: 0;
+  background: radial-gradient(800px 380px at 80% 0%, rgba(61, 111, 224, .16), transparent 70%),
+    linear-gradient(var(--x-line) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, var(--x-line) 1px, transparent 1px) 0 0 / 64px 64px;
+  -webkit-mask-image: linear-gradient(#000, transparent); mask-image: linear-gradient(#000, transparent); }
+body:not(.x-home) #main > * { position: relative; z-index: 1; }
+
+/* ---------- Typography ---------- */
+#main h1, #main h2, #main h3, #main h4 { color: #fff; }
+body:not(.x-home) #main h1 { font-family: var(--x-display); font-variation-settings: "wdth" 112; font-weight: 800; font-size: clamp(2rem, 3.8vw, 3.2rem); line-height: 1.02; letter-spacing: -.03em; margin: 6px 0 14px; text-wrap: balance; }
+body:not(.x-home) #main h2 { font-family: var(--x-display); font-variation-settings: "wdth" 110; font-weight: 800; font-size: clamp(1.45rem, 2.4vw, 2rem); letter-spacing: -.02em; }
+body:not(.x-home) #main h3 { font-weight: 600; letter-spacing: -.005em; }
+#main .muted { color: var(--x-mute); }
+#main a { color: var(--x-or-2); }
+#main a:hover { color: #fff; }
+.crumbs { font: 500 .74rem/1.4 var(--x-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--x-mute); padding: 22px 0 10px; }
+.crumbs a { color: var(--x-mute); text-decoration: none; }
+#main .crumbs a:hover { color: var(--x-or-2); }
+.kicker { font: 500 .74rem/1 var(--x-mono); letter-spacing: .16em; color: var(--x-or-2); display: inline-flex; align-items: center; gap: 12px; margin: 8px 0 8px; }
+.kicker::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+#main code { font-family: var(--x-mono); font-size: .86em; color: var(--x-fg-2); }
+
+/* ---------- Buttons ---------- */
+.btn { border-radius: 10px; font-weight: 600; transition: background .2s, border-color .2s, color .2s, transform .2s var(--x-ease), box-shadow .2s; }
+#main .btn-primary, .drawer .btn-primary, .mbar .btn-primary { background: var(--x-or); color: var(--x-or-ink); }
+#main .btn-primary:hover, .drawer .btn-primary:hover, .mbar .btn-primary:hover { background: var(--x-or-2); filter: none; transform: translateY(-1px); box-shadow: 0 12px 30px -12px rgba(255, 107, 26, .7); color: var(--x-or-ink); }
+#main .btn-brand, .drawer .btn-brand, .mbar .btn-brand { background: #1d3a80; color: #fff; border-color: rgba(150, 175, 230, .3); }
+#main .btn-brand:hover, .drawer .btn-brand:hover, .mbar .btn-brand:hover { background: #26499c; color: #fff; }
+#main .btn-ghost, .drawer .btn-ghost, .mbar .btn-ghost, .fixpanel .btn-ghost { background: transparent; color: var(--x-fg); border: 1px solid var(--x-line-2); }
+#main .btn-ghost:hover, .drawer .btn-ghost:hover, .mbar .btn-ghost:hover { border-color: var(--x-steel-2); color: #fff; }
+#main .btn-light { background: #fff; color: var(--x-n900); }
+#main .linkbtn, .drawer .linkbtn { color: var(--x-or-2); }
+
+/* ---------- Forms ---------- */
+#main input[type="text"], #main input[type="email"], #main input[type="tel"], #main input[type="number"], #main input[type="date"], #main input[type="password"], #main select, #main textarea,
+.drawer input[type="text"], .drawer select, .filters input[type="number"], .filters select {
+  background: #0a1532; border: 1px solid var(--x-line-2); color: #fff; border-radius: 8px; }
+#main input:focus, #main select:focus, #main textarea:focus, .drawer input:focus, .filters input:focus { outline: none; border-color: var(--x-or); box-shadow: 0 0 0 4px rgba(255, 107, 26, .16); }
+#main input::placeholder, #main textarea::placeholder { color: #6f7d9c; }
+#main input[type="date"] { color-scheme: dark; }
+#main select { color-scheme: dark; }
+#main label { color: var(--x-fg-2); font-weight: 500; }
+#main .check input, .filters input[type="checkbox"], .filters input[type="radio"], #main input[type="radio"] { accent-color: var(--x-or); }
+#main .drop { background: rgba(255, 255, 255, .02); border: 1.5px dashed var(--x-line-2); border-radius: 12px; color: var(--x-fg-2); transition: border-color .2s, background .2s; }
+#main .drop:hover, #main .drop.over { border-color: var(--x-or); background: rgba(255, 107, 26, .05); }
+.filelist li { border-bottom-color: var(--x-line); }
+.qty { border-radius: 8px; border-color: var(--x-line-2); background: #0a1532; }
+.qty button { background: rgba(255, 255, 255, .04); color: var(--x-fg); }
+.qty button:hover { background: rgba(255, 107, 26, .18); color: #fff; }
+#main .qty input, .mbar .qty input, .drawer .qty input { background: transparent; border: 0; box-shadow: none; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ---------- Surfaces ---------- */
+#main .card, #main .buybox, #main .joint, #main .order, #main .kpi, #main .empty, #main .acctnav, #main .quote {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .01)); border: 1px solid var(--x-line-2); border-radius: 16px; }
+#main .card { padding: clamp(20px, 2.4vw, 28px); }
+#main .notice { background: rgba(61, 111, 224, .1); border-left: 3px solid #6f97f0; border-radius: 10px; color: var(--x-fg); }
+#main .notice.warnbox { background: rgba(245, 178, 91, .08); border-left-color: #f5b25b; }
+#main .section.alt { background: var(--x-n900); border-top: 1px solid var(--x-line); border-bottom: 1px solid var(--x-line); }
+#main .section { padding: clamp(48px, 6vw, 80px) 0; }
+.badge { background: rgba(255, 255, 255, .07); color: var(--x-fg-2); font-family: var(--x-mono); font-weight: 500; font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; padding: 4px 8px; border-radius: 5px; }
+.badge.ok { background: rgba(70, 217, 138, .14); color: var(--x-ok); }
+.badge.warn { background: rgba(245, 178, 91, .14); color: #f5b25b; }
+.tag { background: rgba(255, 255, 255, .06); color: var(--x-fg-2); font-family: var(--x-mono); font-size: .72rem; }
+.stock-in { color: var(--x-ok); }
+.stock-out { color: #f5b25b; }
+
+/* ---------- Category / search: data-sheet table ---------- */
+.catlayout { gap: 24px; }
+.filters { background: var(--x-n900); border: 1px solid var(--x-line-2); border-radius: 16px; padding: 18px; scrollbar-width: thin; scrollbar-color: #2a3a63 transparent; }
+.filters h3 { font: 600 .7rem/1 var(--x-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--x-steel); margin: 22px 0 10px; }
+.filters h3:first-child { margin-top: 4px; }
+.optlist label { color: var(--x-fg-2); border-radius: 6px; padding: 5px 6px; margin: 0 -6px; transition: background .15s; }
+.optlist label:hover { background: rgba(255, 255, 255, .04); color: #fff; }
+.optlist label span:last-child { font: 500 .72rem/1.6 var(--x-mono); color: var(--x-mute); }
+.switch { color: #fff; }
+.toolbar { padding: 4px 0 6px; }
+.toolbar select { background: #0a1532; }
+.fchip { background: rgba(255, 107, 26, .12); color: #fff; border: 1px solid rgba(255, 107, 26, .35); border-radius: 999px; }
+.fchip:hover { background: rgba(255, 107, 26, .22); }
+#main .scrollx { border: 1px solid var(--x-line-2); border-radius: 16px; background: var(--x-n900); }
+.ptable { font-size: .92rem; }
+.ptable th { background: #0c1838; color: var(--x-steel); font: 600 .68rem/1.2 var(--x-mono); letter-spacing: .1em; text-transform: uppercase; padding: 14px 10px; border-bottom: 1px solid var(--x-line-2); position: sticky; top: 0; }
+.ptable td { border-bottom: 1px solid var(--x-line); padding: 10px; color: var(--x-fg-2); }
+.ptable tr:last-child td { border-bottom: 0; }
+.ptable tr:hover td { background: rgba(61, 111, 224, .07); }
+#main .ptable td.name a { color: #fff; font-weight: 600; }
+#main .ptable td.name a:hover { color: var(--x-or-2); }
+.ptable td.name .small, .ptable td.name .muted { font-family: var(--x-mono); font-size: .74rem; color: var(--x-mute); }
+.ptable td b { color: #fff; }
+.ptable .pthumb { background-color: #fff; border-color: transparent; border-radius: 6px; }
+.ptable .btn-sm, .ptable .btn { min-height: 38px; }
+.pager button { background: transparent; border-color: var(--x-line-2); color: var(--x-fg-2); border-radius: 8px; font-family: var(--x-mono); }
+.pager button:hover { border-color: var(--x-steel-2); color: #fff; }
+.pager button[aria-current="page"] { background: var(--x-or); color: var(--x-or-ink); border-color: var(--x-or); }
+#main .empty { border-style: dashed; padding: 36px; }
+@media (max-width: 900px) {
+  #main .scrollx { border: 0; background: transparent; border-radius: 0; }
+  .ptable tr { border-bottom-color: var(--x-line); padding: 14px 4px; }
+  .ptable tr:hover td { background: none; }
+  .filters { border-radius: 18px 18px 0 0; box-shadow: 0 -30px 60px rgba(0, 0, 0, .6); }
+}
+
+/* Standard header band (added by the concept on category pages) */
+.xs-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 40px; align-items: end; margin: 0 0 28px; }
+.xs-art { width: clamp(180px, 22vw, 280px); color: var(--x-steel); opacity: .9; }
+.xs-art svg { width: 100%; height: auto; }
+.xs-art svg text { fill: currentColor; }
+.xs-facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+.xs-facts li { font: 500 .74rem/1 var(--x-mono); color: var(--x-fg-2); border: 1px solid var(--x-line-2); border-radius: 999px; padding: 8px 12px; }
+.xs-facts li b { color: #fff; font-weight: 600; }
+.xs-facts li.ok b { color: var(--x-ok); }
+@media (max-width: 760px) { .xs-head { grid-template-columns: 1fr; } .xs-art { display: none; } }
+
+/* ---------- Product page ---------- */
+.pgrid { gap: clamp(24px, 4vw, 56px); }
+#main .drawing { border: 1px solid var(--x-line-2); border-radius: 18px; overflow: hidden; color: var(--x-steel-2); background:
+  linear-gradient(rgba(150, 175, 230, .06) 1px, transparent 1px) 0 0 / 20px 20px,
+  linear-gradient(90deg, rgba(150, 175, 230, .06) 1px, transparent 1px) 0 0 / 20px 20px, var(--x-n900); }
+#main .drawing.photo { background: radial-gradient(120% 90% at 50% 30%, #fff 0%, #e9eef6 60%, #cfd8e8 100%); }
+#main .drawing.photo .ph.big { background-color: transparent; mix-blend-mode: multiply; }
+#main .drawing .mini { color: var(--x-n800); }
+#main .drawing.photo .small { color: #4b5874; }
+.specs th, .specs td { border-bottom-color: var(--x-line); }
+.specs th { color: var(--x-mute); font: 500 .74rem/1.4 var(--x-mono); letter-spacing: .06em; text-transform: uppercase; }
+.specs td { color: #fff; }
+#main .buybox { position: relative; padding: clamp(20px, 2.4vw, 28px); background: linear-gradient(170deg, var(--x-n800), var(--x-n900)); box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .9); }
+#main .buybox::before { content: ""; position: absolute; left: 24px; right: 24px; top: -1px; height: 2px; background: linear-gradient(90deg, transparent, var(--x-or), transparent); }
+.price { font-family: var(--x-display); font-variation-settings: "wdth" 112; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+.certopts label { background: rgba(255, 255, 255, .02); border-color: var(--x-line-2); color: var(--x-fg-2); border-radius: 8px; padding: 8px 12px; cursor: pointer; transition: border-color .15s, background .15s; }
+.certopts label:hover { border-color: var(--x-steel-2); }
+.certopts label:has(input:checked) { border-color: var(--x-or); background: rgba(255, 107, 26, .1); color: #fff; }
+#main .joint header { border-bottom-color: var(--x-line); }
+#main .joint .jrow { border-bottom-color: var(--x-line); }
+#main .alts a { border-color: var(--x-line-2); color: var(--x-fg); border-radius: 10px; background: rgba(255, 255, 255, .02); }
+#main .alts a:hover { border-color: var(--x-or); }
+.mbar { background: rgba(7, 14, 31, .96); border-top-color: var(--x-line-2); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--x-fg); }
+
+/* ---------- Basket / quick order / account ---------- */
+.btable th { background: #0c1838; color: var(--x-steel); font: 600 .68rem/1.2 var(--x-mono); letter-spacing: .1em; text-transform: uppercase; }
+.btable th, .btable td { border-bottom-color: var(--x-line); }
+#main .btable td a { color: #fff; font-weight: 600; }
+#main .btable td a:hover { color: var(--x-or-2); }
+.steps li::before { background: var(--x-or); color: var(--x-or-ink); font-family: var(--x-mono); font-weight: 600; }
+#main .steps li { color: var(--x-fg-2); }
+.acctnav a { color: var(--x-fg-2); border-bottom-color: var(--x-line); }
+#main .acctnav a:hover { background: rgba(255, 255, 255, .04); color: #fff; }
+#main .acctnav a[aria-current="page"] { background: rgba(255, 107, 26, .12); color: #fff; box-shadow: inset 3px 0 0 var(--x-or); }
+.kpi b { font-family: var(--x-display); font-variation-settings: "wdth" 115; font-weight: 800; font-size: 1.8rem; color: #fff; }
+#main .order header { background: rgba(255, 255, 255, .03); border-radius: 16px 16px 0 0; border-bottom: 1px solid var(--x-line); }
+.order li { border-bottom-color: var(--x-line); }
+
+/* ---------- Industry page hero ---------- */
+#main .hero { position: relative; text-align: left; background:
+  radial-gradient(900px 500px at 80% 20%, rgba(61, 111, 224, .28), transparent 62%),
+  radial-gradient(600px 380px at 0% 100%, rgba(255, 107, 26, .12), transparent 65%), var(--x-n950);
+  border-bottom: 1px solid var(--x-line); overflow: hidden; }
+#main .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--x-line) 1px, transparent 1px), linear-gradient(90deg, var(--x-line) 1px, transparent 1px); background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 70% 30%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 70% at 70% 30%, #000 20%, transparent 75%); }
+#main .hero .wrap { position: relative; padding-top: clamp(40px, 6vw, 80px); padding-bottom: clamp(48px, 6vw, 80px); }
+#main .hero h1 { margin-left: 0; max-width: 18ch; font-size: clamp(2.2rem, 4.6vw, 3.8rem); }
+#main .hero p.lead { margin-left: 0; color: var(--x-fg-2); }
+#main .hero .actions { justify-content: flex-start; }
+#main .hero .small, #main .hero .small a { color: var(--x-mute) !important; font-family: var(--x-mono); text-transform: uppercase; letter-spacing: .06em; font-size: .74rem; text-decoration: none; }
+#main .truststrip { background: var(--x-n900); color: var(--x-fg-2); border-bottom: 1px solid var(--x-line); }
+#main .truststrip svg { color: var(--x-or); }
+
+/* Shared old components still used on some pages */
+#main .tile { background: var(--x-n900); border-color: var(--x-line-2); border-radius: 14px; color: var(--x-fg); }
+#main .tile:hover { border-color: rgba(255, 107, 26, .5); box-shadow: none; }
+#main .tile strong { color: #fff; }
+#main .stdchip { background: rgba(255, 255, 255, .02); border-color: var(--x-line-2); color: var(--x-fg); border-radius: 12px; }
+#main .stdchip:hover { border-color: var(--x-or); }
+#main .route { background: var(--x-n900); border: 1px solid var(--x-line-2); border-radius: 16px; }
+#main .quote blockquote { color: var(--x-fg); }
+#main .cmp { background: transparent; }
+#main .cmp thead th { background: #0c1838; }
+#main details.faq { border-bottom-color: var(--x-line); }
+#main details.faq summary { color: #fff; }
+
+/* ---------- Drawer ---------- */
+.drawer { background: var(--x-n900); color: var(--x-fg); border-left: 1px solid var(--x-line-2); box-shadow: -30px 0 60px rgba(0, 0, 0, .55); }
+.drawer header { border-bottom-color: var(--x-line); }
+.drawer header strong { font-family: var(--x-display); font-variation-settings: "wdth" 110; font-weight: 800; color: #fff; }
+.drawer footer { border-top-color: var(--x-line); }
+.scrim { background: rgba(2, 5, 12, .6); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); }
+
+/* ---------- Confirmation ---------- */
+.xc-tick { width: 72px; height: 72px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(70, 217, 138, .12); color: var(--x-ok); border: 1px solid rgba(70, 217, 138, .4); margin: 8px 0 8px; }
+.xc-ref { display: inline-flex; gap: 10px; align-items: center; font: 600 1rem/1 var(--x-mono); color: #fff; border: 1px dashed var(--x-line-2); border-radius: 10px; padding: 12px 16px; margin: 6px 0 18px; }
+.xc-ref span { color: var(--x-mute); font-weight: 500; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; }
+
+/* ---------- Page progress (basket) ---------- */
+.xs-steps { display: flex; flex-wrap: wrap; gap: 6px 22px; list-style: none; padding: 0; margin: 4px 0 22px; font: 500 .74rem/1 var(--x-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--x-mute); }
+.xs-steps li { display: inline-flex; align-items: center; gap: 8px; }
+.xs-steps li i { font-style: normal; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--x-line-2); display: inline-flex; align-items: center; justify-content: center; }
+.xs-steps li.on { color: #fff; }
+.xs-steps li.on i { background: var(--x-or); border-color: var(--x-or); color: var(--x-or-ink); }
+.xs-steps li.done i { background: rgba(70, 217, 138, .14); border-color: rgba(70, 217, 138, .5); color: var(--x-ok); }
+
+/* ---------- Fixes and hierarchy ---------- */
+#main:focus, #main:focus-visible { outline: none; }
+#main .wrap.section { padding-left: var(--x-pad); padding-right: var(--x-pad); }
+#main, .drawer, .filters, .mbar { color-scheme: dark; }
+/* Orange = the action. Everything else is neutral. */
+#main .btn-brand, .drawer .btn-brand, .mbar .btn-brand { background: rgba(255, 255, 255, .05); color: #fff; border: 1px solid var(--x-line-2); }
+#main .btn-brand:hover, .drawer .btn-brand:hover, .mbar .btn-brand:hover { background: rgba(255, 255, 255, .09); border-color: var(--x-steel-2); }
+#main .hero .btn-light { background: transparent; color: #fff; border: 1px solid var(--x-line-2); }
+#main .hero .btn-light:hover { border-color: var(--x-steel-2); }
+#main .routes { gap: 14px; }
+#main .route { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+#main .route h3 { margin: 0; }
+
+/* Design notes overview */
+.xn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; margin-top: 16px; }
+.xn-card { border: 1px solid var(--x-line-2); border-radius: 14px; padding: 18px; background: rgba(255, 255, 255, .02); }
+.xn-card b { display: flex; gap: 10px; align-items: baseline; color: #fff; }
+.xn-card b i { font: 600 .7rem/1 var(--x-mono); font-style: normal; color: var(--x-or-ink); background: var(--x-or); border-radius: 4px; padding: 4px 5px; }
+.xn-card p { color: var(--x-mute); margin: 8px 0 0; font-size: .92rem; }
+
+/* ---------- Phone: compact header search row, clean table cards ---------- */
+@media (max-width: 900px) {
+  .hrow2 .row { flex-wrap: nowrap; }
+  .hrow2 .search { flex: 1 1 0; flex-basis: 0; min-width: 0; }
+  .hrow2 a[href="#/hurtigordre"] { font-size: 0; gap: 0; padding: 0 12px; flex: 0 0 auto; }
+  .ptable td, .ptable tr:hover td { border: 0; background: none; }
+  .ptable tr { padding: 16px 4px; border-bottom: 1px solid var(--x-line); }
+  .ptable td.name { padding-bottom: 6px; }
+}
+.hrow1 { background: var(--x-n950); }
+.hdr.stack .nav { background: var(--x-n950); }
+
 </style>
 </head>
 <body>
@@ -2111,7 +2359,10 @@ function viewCategory(slug){
   if(!items.length) return `<div class="wrap"><div class="crumbs">${crumbHtml}</div><h1>${esc(title)}</h1>${emptyStateNoData(cat)}</div>`;
   return `<div class="wrap">
     <div class="crumbs">${crumbHtml}</div>
-    ${std?`<div class="kicker" data-fix="K4">Produkt · ${items.length} varianter</div>`:''}<h1>${esc(title)}</h1>${intro?`<p class="muted" style="max-width:70ch">${esc(intro)}</p>`:''}
+    ${std?`<div class="xs-head" data-note="C1"><div><div class="kicker" data-fix="K4">Produkt · ${items.length} varianter</div><h1>${esc(title)}</h1>${intro?`<p class="muted" style="max-width:70ch;margin:0">${esc(intro)}</p>`:''}
+      <ul class="xs-facts"><li class="ok"><b>${fmtInt(items.filter(p=>p.stock>0).length)}</b> på lager nå</li><li><b>${STANDARDS[std].mats.length}</b> materialer</li>${STANDARDS[std].iso?`<li>Tilsvarer <b>${esc(STANDARDS[std].iso)}</b></li>`:''}<li>Ned til <b>1 stk</b></li><li><b>2.1</b> / <b>3.1</b> sertifikat</li></ul></div>
+      <div class="xs-art" aria-hidden="true">${drawing(STANDARDS[std].kind,std,true)}</div></div>`
+    :`<h1>${esc(title)}</h1>${intro?`<p class="muted" style="max-width:70ch">${esc(intro)}</p>`:''}`}
     ${subs}
     <div class="catlayout" id="catlayout">${filterPanel(items,UI.f)}<div id="results">${resultsBlock(items,UI.f)}</div></div>
   </div>`;
@@ -2299,6 +2550,7 @@ function viewBasket(){
   const anyOut=S.basket.some(l=>BY_SKU[l.sku].stock===0);
   return `<div class="wrap">
     <div class="crumbs"><a href="#/">Hjem</a> / ${basketName()}</div>
+    <ol class="xs-steps" data-note="B1" aria-label="Steg"><li class="on"><i>1</i>Produkter</li><li><i>2</i>${S.loggedIn?'Levering':'Kontaktinfo'}</li><li><i>3</i>${S.loggedIn?'Bekreftelse':'Svar innen 20 min'}</li></ol>
     <h1 data-fix="B1">${S.loggedIn?'Din bestilling':'Din tilbudsforespørsel'}</h1>
     <p class="muted">${S.loggedIn?'Prisene er dine avtalepriser eks. mva. Du kan også be om tilbud på hele kurven.':'Du får pris og leveringstid fra oss. Logg inn for å se avtalepris og bestille direkte.'}</p>
     ${anyOut?`<p class="notice warnbox" data-fix="P1">En eller flere varer er bestillingsvarer. Vi bekrefter leveringstid i ${S.loggedIn?'ordrebekreftelsen':'tilbudet'}.</p>`:''}
@@ -2324,11 +2576,13 @@ function viewConfirm(){
     ? ['Du får ordrebekreftelse på e-post innen kort tid.','Lagervarer plukkes og sendes eller gjøres klare for henting samme dag.','Sertifikater ligger på ordren under Min konto.']
     : ['Du får en kopi av henvendelsen på e-post nå.','En selger ser på behovet og svarer innen 20 minutter i åpningstiden.','Fullstendig tilbud med pris og leveringstid sendes innen 24 timer.'];
   return `<div class="wrap section" data-fix="E4">
+    <span class="xc-tick" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
     <h1>${titles[L.type]||'Takk'}</h1>
-    <p>Referanse: <b>${esc(L.ref)}</b>. Oppgi referansen hvis du kontakter oss.</p>
+    <p class="xc-ref" data-note="F1"><span>Referanse</span>${esc(L.ref)}</p>
+    <p class="muted">Oppgi referansen hvis du kontakter oss.</p>
     ${L.type==='notify'?'':`<div class="two"><div><h2 style="font-size:1.3rem">Hva skjer nå</h2><ol class="steps">${next.map(n=>`<li>${n}</li>`).join('')}</ol></div>
     <div class="card"><h3>Haster det?</h3><p>Ring <a href="tel:51637800">51 63 78 00</a> i åpningstiden, eller vakttelefon <a href="tel:47709806">477 09 806</a> utenom kontortid.</p></div></div>`}
-    <p style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px"><a class="btn btn-brand" href="#/">Til forsiden</a><a class="btn btn-ghost" href="#/hurtigordre">Hurtigordre</a>${S.loggedIn?'<a class="btn btn-ghost" href="#/konto/ordre">Mine ordre</a>':''}</p>
+    <p style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px"><a class="btn btn-primary" href="#/">Til forsiden</a><a class="btn btn-ghost" href="#/hurtigordre">Hurtigordre</a>${S.loggedIn?'<a class="btn btn-ghost" href="#/konto/ordre">Mine ordre</a>':''}</p>
   </div>`;
 }
 
@@ -2398,7 +2652,7 @@ function viewQuick(){
       <label for="qotext">Linjer</label>
       <textarea id="qotext" style="min-height:200px;font-family:ui-monospace,Menlo,Consolas,monospace" placeholder="04093307100030;200&#10;DIN 934 A4 M10 200&#10;DIN 125 A4 M10 400">${esc(UI.qoText)}</textarea>
       <p style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
-        <button type="button" class="btn btn-brand" data-act="qoparse">Finn produktene</button>
+        <button type="button" class="btn btn-primary" data-act="qoparse">Finn produktene</button>
         <button type="button" class="btn btn-ghost" data-act="qofile">Last opp CSV</button>
         <button type="button" class="linkbtn" data-act="qoexample">Lim inn eksempel</button>
       </p>
@@ -3235,7 +3489,40 @@ const DESIGN_NOTES = {
   N12:['Drop a drawing anywhere','Dropping a file on this zone opens the special-product form with the file already attached. One gesture instead of four steps.'],
   N13:['Comparison framed as standard vs special','The brand line "special elsewhere, standard here" becomes the argument, with Industrisalg\'s column visually highlighted.'],
   N14:['Contact without friction','Short form, files allowed, live opening status above it, and a phone band in the footer on every page.'],
-  N15:['Design system','Dark steel palette with the signature orange used only for actions and highlights. Archivo for display, DM Sans for reading, IBM Plex Mono for specs. Motion respects reduced-motion settings.']
+  N15:['Design system','Dark steel palette with the signature orange used only for actions and highlights. Archivo for display, DM Sans for reading, IBM Plex Mono for specs. Motion respects reduced-motion settings.'],
+
+  C1:['The standard as a product, not a folder','The header reads like a data sheet: DIN and ISO equivalent, how many sizes are in stock right now, materials, single-piece buying and certificates. Buyers know they are in the right place before they scroll.'],
+  C2:['Filters that match how buyers narrow down','Material, diameter, length range and grade, each with live counts. Active filters show as removable chips above the table, with an in-stock-only switch.','.filters'],
+  C3:['Order straight from the table','Every row has diameter, length, pitch, grade, live stock, a quantity field and an add button. Buyers who know the size never need to open a product page.','#results'],
+  C4:['Persistent basket rail','After the first add, a slim basket column stays on screen with every line, so buyers keep browsing while seeing what they have collected.','#minicart'],
+
+  S1:['Search that reads buyer shorthand','DIN or ISO numbers, M10x30, 10x30, A4, A2 and product words are understood. The line under the title shows how the query was interpreted.','#main h1'],
+  S2:['Results as a buyable table','Same data-sheet table and filters as the standard pages, so search results can be ordered directly.','#results'],
+
+  P1:['One clear primary action','Visitors add to the quote request, logged-in customers add to their order with their own price. Stock, same-day dispatch and certificate sit right above the button.','.buybox'],
+  P2:['Certificate chosen on the product','2.1 is included, 3.1 can be selected per line. The choice follows the line into the quote or order.','.certopts'],
+  P3:['Complete the joint','Matching nut, washer and Nord-Lock in the same material and size, added in one click with quantities matched to the bolt. Raises order value while saving the buyer time.','.joint'],
+  P4:['Photo plus technical drawing','A real photo and a dimensioned schematic per standard, so every size has a clear image.','.drawing'],
+  P5:['Specs a technician would ask for','Standard, diameter, length, pitch, material, grade and pack size in a compact data-sheet table.','.specs'],
+
+  B1:['Progress in three steps','Products, contact details, reply. Buyers see how short the rest of the process is.'],
+  B2:['Edit lines without reloading','Quantity and certificate can be changed directly in each line. Nothing refreshes while typing.','.btable'],
+  B3:['A short form with files allowed','Email or phone, not both. Drawings and lists can be attached to the same request.','form[data-form]'],
+
+  F1:['Reference and next steps','Clear reference number, what happens next, and the response promise, plus the after-hours phone for anything urgent.'],
+
+  Q1:['Paste a list, get a basket','Item numbers or descriptions with quantities, one per line, or a CSV export. Each line is matched against stock; unmatched lines go to a technician.','#qotext'],
+  Q2:['Explained in three steps','The method is shown next to the input, so first-time users understand what will happen.','.steps'],
+
+  E1:['Engineering files accepted','DWG, DXF, STEP, XLSX and CSV as well as PDF and images, up to 5 files of 20 MB.','.drop'],
+  E2:['Only what is needed to reply','Name, company and either email or phone. Everything else is optional.','.grid2'],
+
+  A1:['Account built for repeat buying','Orders, quotes, saved lists and certificates in one place, with reorder and quote acceptance one click away.','.acctnav'],
+
+  I1:['Industry landing pages','Each industry gets its own page with relevant products, documentation requirements, a customer quote and an enquiry form.','#main .hero'],
+  I2:['Products already filtered for the industry','The most used items in the right material, orderable from the table.','.ptable'],
+
+  K1:['Contact without friction','Short form, files allowed, response promise and direct phone numbers next to it.','form[data-form]']
 };
 
 /* ---------- English for the new copy ---------- */
@@ -3283,7 +3570,11 @@ const DESIGN_NOTES = {
     'Trenger du hjelp nå?':'Need help now?','Snakk med en spesialist på festemateriell.':'Talk to a fastener specialist.',
     'Mandag til fredag 07:00 til 16:00. Akutt utenom kontortid: vakttelefon.':'Monday to Friday 07:00 to 16:00. Urgent outside office hours: on-call phone.',
     'Sentralbord':'Switchboard','Vakttelefon':'On-call phone','Siden 1953':'Since 1953','Konsept av Kilowott':'Concept by Kilowott',
-    'filer lagt ved':'files attached'
+    'filer lagt ved':'files attached',
+    'Steg':'Steps','Produkter':'Products','Kontaktinfo':'Contact details','Levering':'Delivery','Bekreftelse':'Confirmation','Svar innen 20 min':'Reply within 20 min',
+    'Referanse':'Reference','Oppgi referansen hvis du kontakter oss.':'Quote this reference if you contact us.',
+    'på lager nå':'in stock now','materialer':'materials','Tilsvarer':'Equivalent to','Ned til':'Down to','sertifikat':'certificate',
+    'Designtanker':'Design notes'
   };
   for(const [k,v] of Object.entries(add)){ if(!(k in EN)) EN[k]=v; EN_LC[k.toLowerCase()]=EN[k]; }
   RULES.unshift([/^(\d[\d\s ]*) artikler$/,(m,a)=>`${a.trim()} items`]);
@@ -3293,6 +3584,18 @@ const DESIGN_NOTES = {
   RULES.unshift([/^(\d+) treff$/,(m,a)=>`${a} matches`]);
   RULES.unshift([/^Bransje (\d+) \/ (\d+)$/,(m,a,b)=>`Industry ${a} / ${b}`]);
 })();
+
+/* ---------- Design notes overview (#/endringer) ---------- */
+const XNOTE_GROUPS=[['Forside',['N1','N2','N3','N4','N5','N6','N7','N8','N9','N10','N11','N12','N13','N14','N15']],
+  ['Standard og kategori',['C1','C2','C3','C4']],['Søk',['S1','S2']],['Produkt',['P1','P2','P3','P4','P5']],
+  ['Forespørsel og bestilling',['B1','B2','B3','F1']],['Hurtigordre',['Q1','Q2']],['Spesialprodukt og kontakt',['E1','E2','K1']],
+  ['Konto',['A1']],['Bransjesider',['I1','I2']]];
+function viewFixes(){
+  document.title='Designtanker | Industrisalg 2.0';
+  return `<div class="wrap section"><div class="kicker">Industrisalg 2.0</div><h1>Designtanker</h1>
+    <p class="muted" style="max-width:62ch">Why each part of the concept works the way it does. Open a page and use the Designtanker button to see the notes in place.</p>
+    ${XNOTE_GROUPS.map(([no,ids])=>`<h2 style="margin-top:40px">${esc(no)}</h2><div class="xn-grid">${ids.map(k=>`<div class="xn-card"><b><i>${k}</i>${esc(DESIGN_NOTES[k][0])}</b><p>${esc(DESIGN_NOTES[k][1])}</p></div>`).join('')}</div>`).join('')}</div>`;
+}
 
 </script>
 <script>
@@ -3731,22 +4034,31 @@ function xDropZone(){
 }
 
 /* ---------- Design notes panel ---------- */
-const XNOTE_PAGES = { home:['N1','N2','N3','N4','N5','N6','N7','N8','N9','N10','N11','N12','N13','N14','N15'] };
+const XNOTE_PAGES = { home:['N1','N2','N3','N4','N5','N6','N7','N8','N9','N10','N11','N12','N13','N14','N15'],
+  category:['C1','C2','C3','C4'], search:['S1','S2','C2','C4'], product:['P1','P2','P3','P4','P5','C4'], basket:['B1','B2','B3'],
+  confirm:['F1'], quick:['Q1','Q2'], special:['E1','E2'], contact:['K1','E1'], account:['A1'], industry:['I1','I2'] };
+function xNoteEl(k){
+  if(k==='N2') return $('.hrow2 .search'); if(k==='N15') return $('.xh-hero');
+  const sel=DESIGN_NOTES[k]&&DESIGN_NOTES[k][2];
+  const el=sel?$(sel):$(`[data-note="${k}"]`);
+  return el && el.getBoundingClientRect().width ? el : null;
+}
 renderFixPanel = function(){
   const ids=XNOTE_PAGES[CURRENT]||[];
   if(!ids.length){
-    $('#fixbody').innerHTML=`<p class="xn-intro">This concept starts with the homepage and the global header, footer and mini cart. This page keeps its current design and gets the full treatment in the next round.</p><p><a href="#/">Go to the homepage</a></p>`;
+    $('#fixbody').innerHTML=`<p class="xn-intro">All design notes are collected on one page.</p><p><a href="#/endringer">See all design notes</a></p>`;
     return;
   }
   $('#fixbody').innerHTML=`<p class="xn-intro">Why the page works the way it does. Click a note to jump to it.</p>
     <label class="check" style="margin-bottom:16px;color:var(--x-fg)"><input type="checkbox" id="xannot" ${document.body.classList.contains('x-annot')?'checked':''}> <span>Show markers on the page</span></label>
-    ${ids.map(k=>`<button type="button" class="xn-item" data-note-go="${k}"><b><i>${k}</i>${esc(DESIGN_NOTES[k][0])}</b><span>${esc(DESIGN_NOTES[k][1])}</span></button>`).join('')}`;
+    ${ids.map(k=>`<button type="button" class="xn-item" data-note-go="${k}"><b><i>${k}</i>${esc(DESIGN_NOTES[k][0])}</b><span>${esc(DESIGN_NOTES[k][1])}</span></button>`).join('')}
+    <p style="margin-top:16px"><a href="#/endringer">See all design notes</a></p>`;
 };
 document.addEventListener('change',e=>{ if(e.target.id==='xannot'){ document.body.classList.toggle('x-annot',e.target.checked); if(e.target.checked) xNotesLayerDraw(); else xNotesLayerClear(); } });
 document.addEventListener('click',e=>{
   const b=e.target.closest('[data-note-go]'); if(!b) return;
   const k=b.dataset.noteGo;
-  const el=k==='N2'?$('.hrow2 .search'):k==='N15'?$('.xh-hero'):$(`[data-note="${k}"]`);
+  const el=xNoteEl(k);
   if(!el) return;
   if(window.innerWidth<900) closeFixes();
   el.scrollIntoView({behavior:xReduced()?'auto':'smooth',block:'center'});
@@ -3756,7 +4068,8 @@ function xNotesLayerClear(){ const l=$('#xnlayer'); if(l) l.remove(); }
 function xNotesLayerDraw(){
   xNotesLayerClear();
   const layer=document.createElement('div'); layer.id='xnlayer'; layer.className='xn-layer';
-  $$('#main [data-note]').forEach(el=>{
+  (XNOTE_PAGES[CURRENT]||[]).forEach(k=>{
+    const el=xNoteEl(k); if(!el||k==='N2'||k==='N15') return; el.dataset.note=k;
     const r=el.getBoundingClientRect(); if(!r.width) return;
     const x=r.left+window.scrollX, y=r.top+window.scrollY;
     const box=document.createElement('div'); box.className='xn-box'; Object.assign(box.style,{left:(x-4)+'px',top:(y-4)+'px',width:(r.width+8)+'px',height:(r.height+8)+'px'});

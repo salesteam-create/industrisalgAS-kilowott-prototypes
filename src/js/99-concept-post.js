@@ -134,22 +134,31 @@ function xDropZone(){
 }
 
 /* ---------- Design notes panel ---------- */
-const XNOTE_PAGES = { home:['N1','N2','N3','N4','N5','N6','N7','N8','N9','N10','N11','N12','N13','N14','N15'] };
+const XNOTE_PAGES = { home:['N1','N2','N3','N4','N5','N6','N7','N8','N9','N10','N11','N12','N13','N14','N15'],
+  category:['C1','C2','C3','C4'], search:['S1','S2','C2','C4'], product:['P1','P2','P3','P4','P5','C4'], basket:['B1','B2','B3'],
+  confirm:['F1'], quick:['Q1','Q2'], special:['E1','E2'], contact:['K1','E1'], account:['A1'], industry:['I1','I2'] };
+function xNoteEl(k){
+  if(k==='N2') return $('.hrow2 .search'); if(k==='N15') return $('.xh-hero');
+  const sel=DESIGN_NOTES[k]&&DESIGN_NOTES[k][2];
+  const el=sel?$(sel):$(`[data-note="${k}"]`);
+  return el && el.getBoundingClientRect().width ? el : null;
+}
 renderFixPanel = function(){
   const ids=XNOTE_PAGES[CURRENT]||[];
   if(!ids.length){
-    $('#fixbody').innerHTML=`<p class="xn-intro">This concept starts with the homepage and the global header, footer and mini cart. This page keeps its current design and gets the full treatment in the next round.</p><p><a href="#/">Go to the homepage</a></p>`;
+    $('#fixbody').innerHTML=`<p class="xn-intro">All design notes are collected on one page.</p><p><a href="#/endringer">See all design notes</a></p>`;
     return;
   }
   $('#fixbody').innerHTML=`<p class="xn-intro">Why the page works the way it does. Click a note to jump to it.</p>
     <label class="check" style="margin-bottom:16px;color:var(--x-fg)"><input type="checkbox" id="xannot" ${document.body.classList.contains('x-annot')?'checked':''}> <span>Show markers on the page</span></label>
-    ${ids.map(k=>`<button type="button" class="xn-item" data-note-go="${k}"><b><i>${k}</i>${esc(DESIGN_NOTES[k][0])}</b><span>${esc(DESIGN_NOTES[k][1])}</span></button>`).join('')}`;
+    ${ids.map(k=>`<button type="button" class="xn-item" data-note-go="${k}"><b><i>${k}</i>${esc(DESIGN_NOTES[k][0])}</b><span>${esc(DESIGN_NOTES[k][1])}</span></button>`).join('')}
+    <p style="margin-top:16px"><a href="#/endringer">See all design notes</a></p>`;
 };
 document.addEventListener('change',e=>{ if(e.target.id==='xannot'){ document.body.classList.toggle('x-annot',e.target.checked); if(e.target.checked) xNotesLayerDraw(); else xNotesLayerClear(); } });
 document.addEventListener('click',e=>{
   const b=e.target.closest('[data-note-go]'); if(!b) return;
   const k=b.dataset.noteGo;
-  const el=k==='N2'?$('.hrow2 .search'):k==='N15'?$('.xh-hero'):$(`[data-note="${k}"]`);
+  const el=xNoteEl(k);
   if(!el) return;
   if(window.innerWidth<900) closeFixes();
   el.scrollIntoView({behavior:xReduced()?'auto':'smooth',block:'center'});
@@ -159,7 +168,8 @@ function xNotesLayerClear(){ const l=$('#xnlayer'); if(l) l.remove(); }
 function xNotesLayerDraw(){
   xNotesLayerClear();
   const layer=document.createElement('div'); layer.id='xnlayer'; layer.className='xn-layer';
-  $$('#main [data-note]').forEach(el=>{
+  (XNOTE_PAGES[CURRENT]||[]).forEach(k=>{
+    const el=xNoteEl(k); if(!el||k==='N2'||k==='N15') return; el.dataset.note=k;
     const r=el.getBoundingClientRect(); if(!r.width) return;
     const x=r.left+window.scrollX, y=r.top+window.scrollY;
     const box=document.createElement('div'); box.className='xn-box'; Object.assign(box.style,{left:(x-4)+'px',top:(y-4)+'px',width:(r.width+8)+'px',height:(r.height+8)+'px'});

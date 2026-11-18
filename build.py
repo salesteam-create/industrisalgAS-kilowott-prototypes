@@ -20,7 +20,7 @@ SCRIPTS = [
 
 
 def main():
-    css = (SRC / "css/base.css").read_text() + "\n" + (SRC / "css/theme.css").read_text()
+    css = (SRC / "css/base.css").read_text() + "\n" + (SRC / "css/theme.css").read_text() + "\n" + (SRC / "css/theme-pages.css").read_text()
     body = (SRC / "shell.html").read_text().replace("[[MAIN]]", "")
     body = body.replace("</body>", "")
     body = body.replace("<body>", "")

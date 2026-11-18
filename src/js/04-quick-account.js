@@ -39,7 +39,7 @@ function viewQuick(){
       <label for="qotext">Linjer</label>
       <textarea id="qotext" style="min-height:200px;font-family:ui-monospace,Menlo,Consolas,monospace" placeholder="04093307100030;200&#10;DIN 934 A4 M10 200&#10;DIN 125 A4 M10 400">${esc(UI.qoText)}</textarea>
       <p style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
-        <button type="button" class="btn btn-brand" data-act="qoparse">Finn produktene</button>
+        <button type="button" class="btn btn-primary" data-act="qoparse">Finn produktene</button>
         <button type="button" class="btn btn-ghost" data-act="qofile">Last opp CSV</button>
         <button type="button" class="linkbtn" data-act="qoexample">Lim inn eksempel</button>
       </p>

@@ -164,6 +164,7 @@ function viewBasket(){
   const anyOut=S.basket.some(l=>BY_SKU[l.sku].stock===0);
   return `<div class="wrap">
     <div class="crumbs"><a href="#/">Hjem</a> / ${basketName()}</div>
+    <ol class="xs-steps" data-note="B1" aria-label="Steg"><li class="on"><i>1</i>Produkter</li><li><i>2</i>${S.loggedIn?'Levering':'Kontaktinfo'}</li><li><i>3</i>${S.loggedIn?'Bekreftelse':'Svar innen 20 min'}</li></ol>
     <h1 data-fix="B1">${S.loggedIn?'Din bestilling':'Din tilbudsforespørsel'}</h1>
     <p class="muted">${S.loggedIn?'Prisene er dine avtalepriser eks. mva. Du kan også be om tilbud på hele kurven.':'Du får pris og leveringstid fra oss. Logg inn for å se avtalepris og bestille direkte.'}</p>
     ${anyOut?`<p class="notice warnbox" data-fix="P1">En eller flere varer er bestillingsvarer. Vi bekrefter leveringstid i ${S.loggedIn?'ordrebekreftelsen':'tilbudet'}.</p>`:''}
@@ -189,11 +190,13 @@ function viewConfirm(){
     ? ['Du får ordrebekreftelse på e-post innen kort tid.','Lagervarer plukkes og sendes eller gjøres klare for henting samme dag.','Sertifikater ligger på ordren under Min konto.']
     : ['Du får en kopi av henvendelsen på e-post nå.','En selger ser på behovet og svarer innen 20 minutter i åpningstiden.','Fullstendig tilbud med pris og leveringstid sendes innen 24 timer.'];
   return `<div class="wrap section" data-fix="E4">
+    <span class="xc-tick" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
     <h1>${titles[L.type]||'Takk'}</h1>
-    <p>Referanse: <b>${esc(L.ref)}</b>. Oppgi referansen hvis du kontakter oss.</p>
+    <p class="xc-ref" data-note="F1"><span>Referanse</span>${esc(L.ref)}</p>
+    <p class="muted">Oppgi referansen hvis du kontakter oss.</p>
     ${L.type==='notify'?'':`<div class="two"><div><h2 style="font-size:1.3rem">Hva skjer nå</h2><ol class="steps">${next.map(n=>`<li>${n}</li>`).join('')}</ol></div>
     <div class="card"><h3>Haster det?</h3><p>Ring <a href="tel:51637800">51 63 78 00</a> i åpningstiden, eller vakttelefon <a href="tel:47709806">477 09 806</a> utenom kontortid.</p></div></div>`}
-    <p style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px"><a class="btn btn-brand" href="#/">Til forsiden</a><a class="btn btn-ghost" href="#/hurtigordre">Hurtigordre</a>${S.loggedIn?'<a class="btn btn-ghost" href="#/konto/ordre">Mine ordre</a>':''}</p>
+    <p style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px"><a class="btn btn-primary" href="#/">Til forsiden</a><a class="btn btn-ghost" href="#/hurtigordre">Hurtigordre</a>${S.loggedIn?'<a class="btn btn-ghost" href="#/konto/ordre">Mine ordre</a>':''}</p>
   </div>`;
 }
 

@@ -367,7 +367,40 @@ const DESIGN_NOTES = {
   N12:['Drop a drawing anywhere','Dropping a file on this zone opens the special-product form with the file already attached. One gesture instead of four steps.'],
   N13:['Comparison framed as standard vs special','The brand line "special elsewhere, standard here" becomes the argument, with Industrisalg\'s column visually highlighted.'],
   N14:['Contact without friction','Short form, files allowed, live opening status above it, and a phone band in the footer on every page.'],
-  N15:['Design system','Dark steel palette with the signature orange used only for actions and highlights. Archivo for display, DM Sans for reading, IBM Plex Mono for specs. Motion respects reduced-motion settings.']
+  N15:['Design system','Dark steel palette with the signature orange used only for actions and highlights. Archivo for display, DM Sans for reading, IBM Plex Mono for specs. Motion respects reduced-motion settings.'],
+
+  C1:['The standard as a product, not a folder','The header reads like a data sheet: DIN and ISO equivalent, how many sizes are in stock right now, materials, single-piece buying and certificates. Buyers know they are in the right place before they scroll.'],
+  C2:['Filters that match how buyers narrow down','Material, diameter, length range and grade, each with live counts. Active filters show as removable chips above the table, with an in-stock-only switch.','.filters'],
+  C3:['Order straight from the table','Every row has diameter, length, pitch, grade, live stock, a quantity field and an add button. Buyers who know the size never need to open a product page.','#results'],
+  C4:['Persistent basket rail','After the first add, a slim basket column stays on screen with every line, so buyers keep browsing while seeing what they have collected.','#minicart'],
+
+  S1:['Search that reads buyer shorthand','DIN or ISO numbers, M10x30, 10x30, A4, A2 and product words are understood. The line under the title shows how the query was interpreted.','#main h1'],
+  S2:['Results as a buyable table','Same data-sheet table and filters as the standard pages, so search results can be ordered directly.','#results'],
+
+  P1:['One clear primary action','Visitors add to the quote request, logged-in customers add to their order with their own price. Stock, same-day dispatch and certificate sit right above the button.','.buybox'],
+  P2:['Certificate chosen on the product','2.1 is included, 3.1 can be selected per line. The choice follows the line into the quote or order.','.certopts'],
+  P3:['Complete the joint','Matching nut, washer and Nord-Lock in the same material and size, added in one click with quantities matched to the bolt. Raises order value while saving the buyer time.','.joint'],
+  P4:['Photo plus technical drawing','A real photo and a dimensioned schematic per standard, so every size has a clear image.','.drawing'],
+  P5:['Specs a technician would ask for','Standard, diameter, length, pitch, material, grade and pack size in a compact data-sheet table.','.specs'],
+
+  B1:['Progress in three steps','Products, contact details, reply. Buyers see how short the rest of the process is.'],
+  B2:['Edit lines without reloading','Quantity and certificate can be changed directly in each line. Nothing refreshes while typing.','.btable'],
+  B3:['A short form with files allowed','Email or phone, not both. Drawings and lists can be attached to the same request.','form[data-form]'],
+
+  F1:['Reference and next steps','Clear reference number, what happens next, and the response promise, plus the after-hours phone for anything urgent.'],
+
+  Q1:['Paste a list, get a basket','Item numbers or descriptions with quantities, one per line, or a CSV export. Each line is matched against stock; unmatched lines go to a technician.','#qotext'],
+  Q2:['Explained in three steps','The method is shown next to the input, so first-time users understand what will happen.','.steps'],
+
+  E1:['Engineering files accepted','DWG, DXF, STEP, XLSX and CSV as well as PDF and images, up to 5 files of 20 MB.','.drop'],
+  E2:['Only what is needed to reply','Name, company and either email or phone. Everything else is optional.','.grid2'],
+
+  A1:['Account built for repeat buying','Orders, quotes, saved lists and certificates in one place, with reorder and quote acceptance one click away.','.acctnav'],
+
+  I1:['Industry landing pages','Each industry gets its own page with relevant products, documentation requirements, a customer quote and an enquiry form.','#main .hero'],
+  I2:['Products already filtered for the industry','The most used items in the right material, orderable from the table.','.ptable'],
+
+  K1:['Contact without friction','Short form, files allowed, response promise and direct phone numbers next to it.','form[data-form]']
 };
 
 /* ---------- English for the new copy ---------- */
@@ -415,7 +448,11 @@ const DESIGN_NOTES = {
     'Trenger du hjelp nå?':'Need help now?','Snakk med en spesialist på festemateriell.':'Talk to a fastener specialist.',
     'Mandag til fredag 07:00 til 16:00. Akutt utenom kontortid: vakttelefon.':'Monday to Friday 07:00 to 16:00. Urgent outside office hours: on-call phone.',
     'Sentralbord':'Switchboard','Vakttelefon':'On-call phone','Siden 1953':'Since 1953','Konsept av Kilowott':'Concept by Kilowott',
-    'filer lagt ved':'files attached'
+    'filer lagt ved':'files attached',
+    'Steg':'Steps','Produkter':'Products','Kontaktinfo':'Contact details','Levering':'Delivery','Bekreftelse':'Confirmation','Svar innen 20 min':'Reply within 20 min',
+    'Referanse':'Reference','Oppgi referansen hvis du kontakter oss.':'Quote this reference if you contact us.',
+    'på lager nå':'in stock now','materialer':'materials','Tilsvarer':'Equivalent to','Ned til':'Down to','sertifikat':'certificate',
+    'Designtanker':'Design notes'
   };
   for(const [k,v] of Object.entries(add)){ if(!(k in EN)) EN[k]=v; EN_LC[k.toLowerCase()]=EN[k]; }
   RULES.unshift([/^(\d[\d\s ]*) artikler$/,(m,a)=>`${a.trim()} items`]);
@@ -425,3 +462,15 @@ const DESIGN_NOTES = {
   RULES.unshift([/^(\d+) treff$/,(m,a)=>`${a} matches`]);
   RULES.unshift([/^Bransje (\d+) \/ (\d+)$/,(m,a,b)=>`Industry ${a} / ${b}`]);
 })();
+
+/* ---------- Design notes overview (#/endringer) ---------- */
+const XNOTE_GROUPS=[['Forside',['N1','N2','N3','N4','N5','N6','N7','N8','N9','N10','N11','N12','N13','N14','N15']],
+  ['Standard og kategori',['C1','C2','C3','C4']],['Søk',['S1','S2']],['Produkt',['P1','P2','P3','P4','P5']],
+  ['Forespørsel og bestilling',['B1','B2','B3','F1']],['Hurtigordre',['Q1','Q2']],['Spesialprodukt og kontakt',['E1','E2','K1']],
+  ['Konto',['A1']],['Bransjesider',['I1','I2']]];
+function viewFixes(){
+  document.title='Designtanker | Industrisalg 2.0';
+  return `<div class="wrap section"><div class="kicker">Industrisalg 2.0</div><h1>Designtanker</h1>
+    <p class="muted" style="max-width:62ch">Why each part of the concept works the way it does. Open a page and use the Designtanker button to see the notes in place.</p>
+    ${XNOTE_GROUPS.map(([no,ids])=>`<h2 style="margin-top:40px">${esc(no)}</h2><div class="xn-grid">${ids.map(k=>`<div class="xn-card"><b><i>${k}</i>${esc(DESIGN_NOTES[k][0])}</b><p>${esc(DESIGN_NOTES[k][1])}</p></div>`).join('')}</div>`).join('')}</div>`;
+}
