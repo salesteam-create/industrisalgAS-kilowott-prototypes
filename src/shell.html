@@ -1,0 +1,83 @@
+<body>
+<div class="demobar" role="region" aria-label="Prototype controls">
+  <div class="wrap">
+    <span class="db-tag"><b>Konsept</b> <span>Industrisalg 2.0</span></span>
+    <span>Vis som:
+      <span class="seg" role="group" aria-label="Kundetype">
+        <button type="button" id="asGuest" aria-pressed="true">Besøkende</button>
+        <button type="button" id="asCustomer" aria-pressed="false">Innlogget kunde</button>
+      </span>
+    </span>
+    <button type="button" class="chip db-notes" id="openFixes"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-4 12.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26A7 7 0 0 0 12 2m-3 18h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z"/></svg><span>Designtanker</span></button>
+  </div>
+</div>
+
+<header class="hdr">
+  <div class="hrow1"><div class="wrap row">
+    <button type="button" class="hbtn menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg><span class="sr">Meny</span>
+    </button>
+    <a class="logo" href="#/"><span class="lrow"><span class="lmark" aria-hidden="true"><svg width="30" height="40" viewBox="0 0 30 40"><g fill="#fff"><rect x="9" y="0" width="12" height="7" rx="1"></rect><rect x="0" y="9" width="30" height="16" rx="3"></rect><rect x="5" y="9" width="2" height="16" fill="#1a3770"></rect><rect x="23" y="9" width="2" height="16" fill="#1a3770"></rect><rect x="8" y="27" width="14" height="3" rx="1"></rect><rect x="9" y="32" width="12" height="3" rx="1"></rect><rect x="10" y="37" width="10" height="3" rx="1"></rect></g></svg></span><strong><b>INDUSTRI</b>SALG</strong></span><span>Etablert i 1953</span></a>
+    <nav class="nav" id="mainnav" aria-label="Kategorier"><ul id="navlist"></ul></nav>
+    <nav class="hactions" aria-label="Konto og kurv">
+      <span class="langsw" role="group" aria-label="Språk"><button type="button" data-lang="no" aria-pressed="true" lang="nb">NO</button><button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button></span>
+      <button type="button" class="hbtn x-msearch" data-act="focussearch" aria-label="Søk"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M10.5 3.5a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM16 16l4.5 4.5"/></svg></button>
+      <a class="hbtn" href="#/konto" id="acctLink"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zM4 21c0-3.9 3.6-6.5 8-6.5s8 2.6 8 6.5"></path></svg><span class="sr" id="acctLbl">Logg inn</span></a>
+      <a class="hbtn" href="#/konto/lister" data-fix="R4"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M6 3h12v18l-6-4.5L6 21z"></path></svg><span class="sr">Mine lister</span></a>
+      <a class="hbtn basketbtn" href="#/kurv" data-fix="B2" id="basketBtn" aria-label="Forespørsel, 0 linjer"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4h14l-2 9H8.2l.4 2H19v2H7L5 6H3V4h2.4z M9 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path></svg><span class="lbl" id="basketLbl">Forespørsel</span><span class="count" id="basketCount">0</span></a>
+    </nav>
+  </div></div>
+  <div class="hrow2"><div class="wrap row">
+    <nav class="x-ql" aria-label="Snarveier"><span>Snarveier</span><a href="#/kategori/din-933">DIN 933</a><a href="#/kategori/din-931">DIN 931</a><a href="#/kategori/din-912">DIN 912</a><a href="#/kategori/din-934">DIN 934</a><a href="#/kategori/din-985">DIN 985</a><a href="#/kategori/nord-lock">Nord-Lock</a></nav>
+    <div class="search" data-fix="D6" role="search">
+      <label for="q" class="sr">Søk etter produkt, standard eller artikkelnummer</label>
+      <input id="q" type="text" autocomplete="off" placeholder="Søk: DIN 933 M10x30, A4, artikkelnr." aria-autocomplete="list" aria-controls="suggest">
+      <button class="go" type="button" id="qgo" aria-label="Søk"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 0 1 6.32 12.9l5.39 5.4-1.41 1.4-5.4-5.39A8 8 0 1 1 10 2m0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12"></path></svg></button>
+      <div class="suggest" id="suggest"></div>
+    </div>
+    <a class="hbtn" href="#/hurtigordre" data-fix="R1"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg>Hurtigordre</a>
+    <a class="hbtn hide-sm" href="#/spesialprodukt">Spesialprodukt</a>
+    <a class="hbtn vakt hide-sm" href="tel:47709806" data-fix="X2"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"></path></svg>Vakttelefon <b>477 09 806</b></a>
+  </div></div>
+</header>
+
+<main id="main" tabindex="-1">[[MAIN]]</main>
+
+<footer class="footer xf">
+  <div class="xf-cta"><div class="wrap">
+    <div class="xf-cta-copy">
+      <p class="x-eyebrow">Trenger du hjelp nå?</p>
+      <p class="xf-cta-h">Snakk med en spesialist på festemateriell.</p>
+      <p class="xf-cta-sub">Mandag til fredag 07:00 til 16:00. Akutt utenom kontortid: vakttelefon.</p>
+    </div>
+    <div class="xf-cta-act">
+      <a class="xf-phone" href="tel:51637800"><span>Sentralbord</span><b>51 63 78 00</b></a>
+      <a class="xf-phone xf-phone-hot" href="tel:47709806"><span>Vakttelefon</span><b>477 09 806</b></a>
+    </div>
+  </div></div>
+  <div class="wrap xf-grid">
+    <div>
+      <a class="logo" href="#/"><span class="lrow"><span class="lmark" aria-hidden="true"><svg width="30" height="40" viewBox="0 0 30 40"><g fill="#fff"><rect x="9" y="0" width="12" height="7" rx="1"></rect><rect x="0" y="9" width="30" height="16" rx="3"></rect><rect x="5" y="9" width="2" height="16" fill="#060c1b"></rect><rect x="23" y="9" width="2" height="16" fill="#060c1b"></rect><rect x="8" y="27" width="14" height="3" rx="1"></rect><rect x="9" y="32" width="12" height="3" rx="1"></rect><rect x="10" y="37" width="10" height="3" rx="1"></rect></g></svg></span><strong><b>INDUSTRI</b>SALG</strong></span><span>Etablert i 1953</span></a>
+      <p class="xf-about">Norges fremste spesialist på festemateriell. ISO 9001:2015-sertifisert og Magnet JQS-registrert.</p>
+      <ul class="xf-badges"><li>ISO 9001:2015</li><li>Magnet JQS</li><li>Siden 1953</li></ul>
+    </div>
+    <div><h4>Selskap</h4><ul><li><a href="#/">Om oss</a></li><li><a href="#/kontakt">Kontakt oss</a></li><li><a href="#/">Blogger og nyheter</a></li><li><a href="#/">Nedlastinger</a></li></ul></div>
+    <div><h4>Kundeservice</h4><ul><li><a href="#/hurtigordre">Hurtigordre</a></li><li><a href="#/spesialprodukt">Finn et spesialprodukt</a></li><li><a href="#/konto">Opprett bedriftskonto</a></li><li><a href="#/?s=faq">Vanlige spørsmål</a></li></ul></div>
+    <div><h4>Ta kontakt</h4><ul><li>Gamleveien 85, 4315 Sandnes</li><li>Telefon <a href="tel:51637800">51 63 78 00</a></li><li>Vakttelefon <a href="tel:47709806">477 09 806</a></li><li><a href="mailto:post@industrisalg.no">post@industrisalg.no</a></li><li>Mandag til fredag 07:00 til 16:00</li></ul></div>
+  </div>
+  <div class="xf-mark" aria-hidden="true">INDUSTRISALG</div>
+  <div class="legal"><div class="wrap"><span>© Industrisalg 2026 · Personvernerklæring · Vilkår og betingelser</span><span>Konsept av Kilowott</span></div></div>
+</footer>
+
+<aside class="minicart" id="minicart" aria-label="Kurv"></aside>
+<button type="button" class="mctab" id="mcTab" data-act="mcshow" data-fix="R8" aria-label="Vis kurv, 0 varer"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4h14l-2 9H8.2l.4 2H19v2H7L5 6H3V4h2.4z M9 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path></svg><b>0</b><span>Vis kurv</span></button>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Lagt til" aria-hidden="true"></aside>
+<aside class="fixpanel" id="fixpanel" aria-label="Designtanker" aria-hidden="true">
+  <header><strong>Designtanker</strong><button type="button" class="btn btn-sm btn-ghost" id="closeFixes">Lukk</button></header>
+  <div class="body" id="fixbody"></div>
+</aside>
+<div class="mbar" id="mbar"></div>
+<div id="toastwrap"></div>
+
+</body>
