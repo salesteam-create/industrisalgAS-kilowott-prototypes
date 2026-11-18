@@ -251,7 +251,9 @@ function viewHome(){
         <a class="x-btn x-btn-blue" href="#/spesialprodukt">Send forespørsel om spesialprodukt ${XI.arr}</a>
       </div>
       <div class="xh-sp-media" data-rv>
-        ${xImg(XM.special,'Spesialprodukter fra Industrisalg')}
+        <div class="xh-wire" id="xwire" role="img" aria-label="3D-modell">
+          <span class="xh-wire-cap" id="xwirecap" aria-live="polite"><b>DIN 933</b><span>Sekskantbolt helgjenget</span></span>
+        </div>
         <a class="xh-drop" href="#/spesialprodukt" id="xdrop" data-note="N12">
           <span class="xh-drop-ic">${XI.upload}</span>
           <span><strong>Slipp tegningen her</strong><p>PDF, DWG, DXF, STEP, JPG, XLSX eller CSV</p></span>

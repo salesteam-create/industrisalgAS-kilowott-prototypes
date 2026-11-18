@@ -57,14 +57,21 @@ function xInitHome(){
 
 /* ---------- 3D viewers ---------- */
 let x3dMounts=[];
-function x3dMount(el,std){
+function x3dMount(el,std,opts){
   if(typeof X3D==='undefined'||!X3D.ok||!el) return null;
-  const m=X3D.mount(el,std); if(!m) return null;
+  const m=X3D.mount(el,std,opts); if(!m) return null;
   x3dMounts.push(m);
   const fb=el.querySelector('.xh-3d-fallback'); if(fb) fb.hidden=true;
   return m;
 }
+function x3dWire(){
+  const el=$('#xwire'); if(!el) return;
+  const cap=$('#xwirecap');
+  x3dMount(el,'933',{ wire:true, cycle:3000, list:['933','934','912','125','985','931','NL'], opacity:.8, color:0x1d4ed8,
+    onChange(k){ if(!cap) return; const s=STANDARDS[k]; cap.classList.remove('in'); void cap.offsetWidth; cap.innerHTML=`<b>${esc(s.din)}</b><span>${esc(tr(s.name))}</span>`; cap.classList.add('in'); } });
+}
 function x3dHome(){
+  x3dWire();
   const stage=$('#x3dstage'); if(!stage) return;
   const m=x3dMount(stage,'933');
   $$('#main [data-x3d]').forEach(b=>b.addEventListener('click',()=>{

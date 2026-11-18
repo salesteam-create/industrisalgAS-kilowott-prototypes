@@ -567,3 +567,13 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--c
   .basketbtn { padding: 8px 12px; }
   .logo strong { font-size: 1rem; }
 }
+
+/* Wire-mesh fastener showcase (special products) */
+.xh-wire { position: relative; aspect-ratio: 5 / 4; border-radius: var(--r-xl); overflow: hidden; border: 1px solid var(--c-line);
+  background: radial-gradient(circle at 1px 1px, rgba(29, 78, 216, .10) 1px, transparent 0) 0 0 / 22px 22px,
+    radial-gradient(80% 70% at 55% 45%, #ffffff 0%, #f3f6fc 65%, #eaf0fa 100%); }
+.xh-wire canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
+.xh-wire-cap { position: absolute; left: 24px; top: 22px; z-index: 1; display: inline-flex; align-items: baseline; gap: 10px; padding: 8px 14px; border-radius: 999px; background: rgba(255, 255, 255, .9); border: 1px solid var(--c-line); font-size: .9rem; color: var(--c-ink-2); pointer-events: none; }
+.xh-wire-cap b { color: var(--c-blue); font-weight: 600; }
+.xh-wire-cap.in { animation: xcap .6s var(--ease); }
+@keyframes xcap { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }

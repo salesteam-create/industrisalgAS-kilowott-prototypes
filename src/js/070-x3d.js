@@ -116,7 +116,26 @@ const X3D = (function(){
     x.fillStyle = gr; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c);
   }
 
-  function mount(el, std){
+  // Wire-mesh look: every mesh becomes thin blue lines on a light background
+  function toWire(g, mat){
+    const swaps = [];
+    g.traverse(o => { if(o.isMesh) swaps.push(o); });
+    swaps.forEach(o => {
+      const geo = o.geometry; let line;
+      if(geo.type === 'TubeGeometry'){
+        // thread: one clean helix line instead of a dense tube mesh
+        line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(geo.parameters.path.getPoints(Math.ceil(geo.parameters.tubularSegments * 1.2))), mat);
+      } else {
+        line = new THREE.LineSegments(new THREE.EdgesGeometry(geo, 24), mat);
+      }
+      line.position.copy(o.position); line.rotation.copy(o.rotation); line.scale.copy(o.scale);
+      o.parent.add(line); o.parent.remove(o); o.geometry.dispose(); if(o.material) o.material.dispose();
+    });
+    return g;
+  }
+
+  function mount(el, std, opts){
+    opts = opts || {};
     if(!ok || !el) return null;
     if(el._x3d){ el._x3d.set(std); return el._x3d; }
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -130,15 +149,22 @@ const X3D = (function(){
     const pivot = new THREE.Group(); scene.add(pivot);
     const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: shadowTex(), transparent: true, depthWrite: false }));
     shadow.rotation.x = -Math.PI / 2; scene.add(shadow);
+    if(opts.wire) shadow.visible = false;
     let model = null, size = 4, rotY = 0.6, rotX = 0, vY = 0, dragging = false, lastX = 0, lastY = 0, idle = 0, visible = true, raf = 0;
+    let wireMat = null, fade = 1, fadeTo = 1, pending = null, cycleT = null;
 
     function set(s){
-      if(model){ pivot.remove(model); model.traverse(o => { if(o.geometry) o.geometry.dispose(); if(o.material) o.material.dispose(); }); }
+      if(model){ pivot.remove(model); model.traverse(o => { if(o.geometry) o.geometry.dispose(); if(o.material && o.material !== wireMat) o.material.dispose(); }); }
       const b = (MODEL_FOR[s] || MODEL_FOR['933'])();
+      if(opts.wire){
+        if(!wireMat) wireMat = new THREE.LineBasicMaterial({ color: opts.color || 0x1d4ed8, transparent: true, opacity: 0, depthWrite: false });
+        toWire(b.g, wireMat); fade = 0; fadeTo = 1;
+        if(opts.onChange) opts.onChange(s);
+      }
       // centre the model on its bounding box
       const box = new THREE.Box3().setFromObject(b.g); const c = box.getCenter(new THREE.Vector3()); b.g.position.sub(c);
       const holder = new THREE.Group(); holder.add(b.g); model = holder; pivot.add(model);
-      size = b.size; frame();
+      size = b.size * (opts.wire ? (b.size < 4 ? 1.75 : 1.2) : 1); frame();
       model.scale.setScalar(0.88); requestAnimationFrame(() => { if(model) model.scale.setScalar(1); });
       el.dataset.std = s;
     }
@@ -151,8 +177,13 @@ const X3D = (function(){
     }
     function tick(){
       raf = 0; if(!visible) return;
-      if(!dragging){ vY *= 0.94; idle++; if(idle > 40 && !reduced()) rotY += 0.0045; rotY += vY; rotX *= 0.96; }
+      if(!dragging){ vY *= 0.94; idle++; if(idle > 40 && !reduced()) rotY += opts.wire ? 0.006 : 0.0045; rotY += vY; rotX *= 0.96; }
       pivot.rotation.set(rotX, rotY, 0);
+      if(wireMat){
+        fade += (fadeTo - fade) * 0.12;
+        wireMat.opacity = fade * (opts.opacity || 0.42);
+        if(pending && fade < 0.03){ const s = pending; pending = null; set(s); }
+      }
       renderer.render(scene, cam);
       raf = requestAnimationFrame(tick);
     }
@@ -164,7 +195,12 @@ const X3D = (function(){
     const ro = new ResizeObserver(frame); ro.observe(el);
     const io = new IntersectionObserver(es => { visible = es[0].isIntersecting; if(visible) start(); }); io.observe(el);
     set(std); start();
-    const api = { set, dispose(){ cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); renderer.dispose(); el._x3d = null; } };
+    // Optional cycling through a list of standards (wire-mesh showcase)
+    if(opts.cycle && opts.list && opts.list.length > 1 && !reduced()){
+      let i = Math.max(0, opts.list.indexOf(std));
+      cycleT = setInterval(() => { if(!visible || dragging) return; i = (i + 1) % opts.list.length; pending = opts.list[i]; fadeTo = 0; }, opts.cycle);
+    }
+    const api = { set, dispose(){ cancelAnimationFrame(raf); clearInterval(cycleT); ro.disconnect(); io.disconnect(); if(wireMat) wireMat.dispose(); renderer.dispose(); el._x3d = null; } };
     el._x3d = api; el.classList.add('x3d-on');
     return api;
   }
