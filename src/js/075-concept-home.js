@@ -101,7 +101,9 @@ function viewHome(){
       ${IND_PHOTO[x.slug]?`<figure class="xh-ind-photo"><img src="${IND_PHOTO[x.slug]}" alt="${esc(x.name)}" loading="lazy" decoding="async" width="480" height="360"></figure>`:`<div class="xh-ind-art" aria-hidden="true">${drawing(s0.kind,x.stds[0],true)}</div>`}
       <p class="x-eyebrow">Bransje ${String(i+1).padStart(2,'0')} / ${INDUSTRIES.length}</p>
       <h3>${esc(x.name)}</h3><p>${esc(x.intro)}</p>
-      <dl class="xh-ind-spec"><dt>Fokus</dt><dd>${esc(x.focus)}</dd><dt>Materiale</dt><dd>${esc(MATERIALS[x.mat].name)}</dd><dt>Mest brukt</dt><dd><span class="xh-ind-chips">${x.stds.map(k=>`<a href="#/kategori/${STANDARDS[k].slug}">${esc(STANDARDS[k].din)}</a>`).join('')}</span></dd></dl>
+      <dl class="xh-ind-spec"><dt>Fokus</dt><dd>${esc(x.focus)}</dd><dt>Materiale</dt><dd>${esc(MATERIALS[x.mat].name)}</dd></dl>
+      <p class="xh-ind-plbl">Mest brukt</p>
+      <ul class="xh-ind-prods">${x.stds.map(k=>{ const st=STANDARDS[k], ph=STD_PHOTO[k]||(st.kind==='bolt'?'bolt_black':''); return `<li><a href="#/kategori/${st.slug}"><span class="xh-ind-pimg">${STD_RENDER[k]?`<img src="${STD_RENDER[k]}" alt="" loading="lazy">`:ph?photo(ph):drawing(st.kind,k,false)}</span><span class="xh-ind-pt"><b>${esc(st.din)}</b><small>${esc(st.name)}</small></span></a></li>`; }).join('')}</ul>
       <div class="xh-ind-acts"><a class="x-btn x-btn-blue" href="#/bransje/${x.slug}">Se bransjeløsningen ${XI.arr}</a><a class="x-btn x-btn-line" href="#/spesialprodukt">Send forespørsel</a></div></div>`; }).join('');
 
   const cmp=[
