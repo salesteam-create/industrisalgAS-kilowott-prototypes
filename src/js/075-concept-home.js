@@ -217,6 +217,50 @@ function viewHome(){
           <div><b>20 min</b><span>Svar i åpningstiden.<br>Fullstendig tilbud innen 24 t.</span></div>
         </div>
       </div>
+      <div class="xq-track" id="xqtrack">
+        <div class="xq-stage">
+          <div class="xq-left">
+            <ol class="xq-rail" aria-label="Tre veier">
+              <li><button type="button" data-xq="0"><i><b></b></i><span>01</span>Produkt</button></li>
+              <li><button type="button" data-xq="1"><i><b></b></i><span>02</span>Tegning</button></li>
+              <li><button type="button" data-xq="2"><i><b></b></i><span>03</span>Liste</button></li>
+            </ol>
+            <div class="xq-steps">
+              <article class="xq-step on" data-step="0"><p class="xq-k">Vei 01 · Fra idé til forespørsel</p><h3>Jeg vet hva jeg trenger</h3><p>Finn produktene, velg antall og sertifikat, og send alt i én forespørsel.</p><a class="x-btn x-btn-blue" href="#/kategori/skruer-bolter">Finn produkter ${XI.arr}</a></article>
+              <article class="xq-step" data-step="1"><p class="xq-k">Vei 02 · Fra skisse til riktig del</p><h3>Jeg har en tegning eller en gammel del</h3><p>Send tegning, bilde eller mål. En teknisk selger finner riktig produkt.</p><a class="x-btn x-btn-blue" href="#/spesialprodukt">Send spesifikasjon ${XI.arr}</a></article>
+              <article class="xq-step" data-step="2"><p class="xq-k">Vei 03 · Fra liste til ferdig pakke</p><h3>Jeg har en innkjøpsliste</h3><p>Lange lister fra innkjøp eller stykkliste (BOM). Vi matcher linjene mot lageret.</p><a class="x-btn x-btn-blue" href="#/hurtigordre">Last opp liste ${XI.arr}</a></article>
+            </div>
+            <p class="xq-hint" aria-hidden="true"><span></span>Scroll for å se hvordan</p>
+          </div>
+          <div class="xq-view">
+            <div class="xq-grid" aria-hidden="true"></div>
+            <div class="xq-canvas" id="xqcanvas" aria-hidden="true"></div>
+            <div class="xq-ov xq-ov1" aria-hidden="true">
+              <div class="xq-card xq-search">
+                <div class="xq-in"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="xq-type" data-text="DIN 931 M12×40 A4"></span><i class="xq-caret"></i></div>
+                <div class="xq-res"><span class="xq-thumb ph ph-bolt_zinc"></span><span><b>Sekskantbolt DIN 931</b><small>M12×40 · A4 syrefast · 1 240 stk på lager</small></span></div>
+                <div class="xq-opts"><span>200 stk</span><span>3.1-sertifikat</span><span class="xq-added">${XI.check} Lagt i forespørsel</span></div>
+              </div>
+            </div>
+            <div class="xq-ov xq-ov2" aria-hidden="true">
+              <span class="xq-lbl" data-dim="len">L 40</span><span class="xq-lbl" data-dim="dia">M12</span>
+              <div class="xq-chip xq-file"><span class="xq-fic">PDF</span><span><b>tegning_flens.pdf</b><small>Mottatt</small></span></div>
+              <div class="xq-chip xq-tech"><span class="xq-dot"></span><span><b>Teknisk selger</b><small>Forslag klart innen 20 min</small></span></div>
+            </div>
+            <div class="xq-ov xq-ov3" aria-hidden="true">
+              <div class="xq-card xq-list">
+                <p class="xq-lt"><span class="xq-fic xls">XLS</span>innkjøpsliste.xlsx</p>
+                <ul>
+                  <li data-li="0"><span>DIN 931 M12×40 A4</span><em>200</em><i>${XI.check}</i></li>
+                  <li data-li="1"><span>DIN 125 M12 A4</span><em>200</em><i>${XI.check}</i></li>
+                  <li data-li="2"><span>DIN 934 M12 A4</span><em>200</em><i>${XI.check}</i></li>
+                </ul>
+                <p class="xq-lf"><b data-found>0</b> av 3 linjer matchet mot lager</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="xh-routes">
         <a class="xh-route prime" href="#/kategori/skruer-bolter" data-rv style="--rv:0"><span class="xh-route-ic">${XI.table}</span><h3>Jeg vet hva jeg trenger</h3><p>Finn produktene, velg antall og sertifikat, og send alt i én forespørsel.</p><span class="x-link">Finn produkter ${XI.arrS}</span></a>
         <a class="xh-route" href="#/spesialprodukt" data-rv style="--rv:1"><span class="xh-route-ic">${XI.draw}</span><h3>Jeg har en tegning eller en gammel del</h3><p>Send tegning, bilde eller mål. En teknisk selger finner riktig produkt.</p><span class="x-link">Send spesifikasjon ${XI.arrS}</span></a>
@@ -406,6 +450,11 @@ function viewFixes(){
     'Prøv med en eksempelliste':'Try with an example list','Min konto':'My account','Logg inn':'Log in',
     'Funnet':'Found','Velg variant':'Choose variant','Tekniker':'Technician','Sendes til tekniker':'Sent to a technician',
     'Velkommen tilbake, Eksempel Verksted AS':'Welcome back, Eksempel Verksted AS','Bestill på nytt':'Reorder',
+    'Tre veier':'Three ways','Produkt':'Product','Tegning':'Drawing','Liste':'List',
+    'Vei 01 · Fra idé til forespørsel':'Route 01 · From idea to request','Vei 02 · Fra skisse til riktig del':'Route 02 · From sketch to the right part','Vei 03 · Fra liste til ferdig pakke':'Route 03 · From list to a complete order',
+    'Scroll for å se hvordan':'Scroll to see how','Sekskantbolt DIN 931':'Hex bolt DIN 931','M12×40 · A4 syrefast · 1 240 stk på lager':'M12×40 · A4 stainless · 1,240 in stock',
+    '200 stk':'200 pcs','3.1-sertifikat':'3.1 certificate','Lagt i forespørsel':'Added to request','Mottatt':'Received','Teknisk selger':'Technical sales','Forslag klart innen 20 min':'Proposal ready within 20 min',
+    'av 3 linjer matchet mot lager':'of 3 lines matched to stock',
     'Tilbud':'Quotes','Tre veier til riktig tilbud.':'Three ways to the right quote.',
     'Velg det som passer det du har i hånden: et produkt, en tegning eller en liste.':'Pick the one that fits what you have: a product, a drawing or a list.',
     '20 min':'20 min','Svar i åpningstiden.':'Reply in opening hours.','Fullstendig tilbud innen 24 t.':'Complete quote within 24 h.',

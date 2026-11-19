@@ -207,5 +207,5 @@ const X3D = (function(){
     el._x3d = api; el.classList.add('x3d-on');
     return api;
   }
-  return { ok, mount };
+  return { ok, mount, BUILD, MATS, envFor, toWire, shadowTex, reduced };
 })();

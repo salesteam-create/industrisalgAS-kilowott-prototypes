@@ -53,6 +53,7 @@ function xInitHome(){
   xIndustry();
   xDropZone();
   x3dHome();
+  if(typeof XQ!=='undefined'){ const q=XQ.mount($('#tilbud')); if(q) x3dMounts.push(q); }
 }
 
 /* ---------- 3D viewers ---------- */
