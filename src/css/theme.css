@@ -741,6 +741,9 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--c
 @keyframes xqbump { 40% { transform: scale(1.35); } }
 .xq-cursor { position: absolute; left: 0; top: 0; width: 0; height: 0; opacity: 0; will-change: transform; z-index: 3; }
 .xq-cursor svg { position: absolute; left: -4px; top: -3px; filter: drop-shadow(0 3px 6px rgba(11,31,77,.3)); }
-.xq-rip { position: absolute; left: -18px; top: -18px; width: 36px; height: 36px; border-radius: 50%; background: rgba(29,78,216,.25); opacity: 0; }
+.xq-rip { position: absolute; left: -22px; top: -22px; width: 44px; height: 44px; border-radius: 50%; background: rgba(29,78,216,.25); opacity: 0; }
 .xq-certs:has(.xq-c31.on) span:first-child { border-color: var(--c-line); color: var(--c-ink-2); background: #fff; }
-.xq-cursor svg { width: 26px; height: 26px; min-width: 26px; max-width: none; }
+.xq-cursor svg { width: 34px; height: 34px; min-width: 34px; max-width: none; left: -5px; top: -4px; }
+
+.xq-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 0; }
+.xq-chips span { font-size: .86rem; font-weight: 500; padding: 7px 12px; border-radius: 999px; background: var(--c-blue-soft); color: var(--c-blue); }

@@ -1639,9 +1639,12 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--c
 @keyframes xqbump { 40% { transform: scale(1.35); } }
 .xq-cursor { position: absolute; left: 0; top: 0; width: 0; height: 0; opacity: 0; will-change: transform; z-index: 3; }
 .xq-cursor svg { position: absolute; left: -4px; top: -3px; filter: drop-shadow(0 3px 6px rgba(11,31,77,.3)); }
-.xq-rip { position: absolute; left: -18px; top: -18px; width: 36px; height: 36px; border-radius: 50%; background: rgba(29,78,216,.25); opacity: 0; }
+.xq-rip { position: absolute; left: -22px; top: -22px; width: 44px; height: 44px; border-radius: 50%; background: rgba(29,78,216,.25); opacity: 0; }
 .xq-certs:has(.xq-c31.on) span:first-child { border-color: var(--c-line); color: var(--c-ink-2); background: #fff; }
-.xq-cursor svg { width: 26px; height: 26px; min-width: 26px; max-width: none; }
+.xq-cursor svg { width: 34px; height: 34px; min-width: 34px; max-width: none; left: -5px; top: -4px; }
+
+.xq-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 0; }
+.xq-chips span { font-size: .86rem; font-weight: 500; padding: 7px 12px; border-radius: 999px; background: var(--c-blue-soft); color: var(--c-blue); }
 
 /* =====================================================================
    INDUSTRISALG 2.0 CONCEPT · Inner pages (light)
@@ -3734,20 +3737,13 @@ function viewHome(){
                 <div class="xq-bar"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="xq-field"><span class="xq-ph">Søk: DIN, dimensjon, materiale …</span><span class="xq-type" data-text="din 931 m12"></span><i class="xq-caret"></i></span><kbd>/</kbd></div>
                 <div class="xq-area">
                   <div class="xq-dd">
-                    <p class="xq-dh">Kategori</p>
-                    <div class="xq-opt xq-cat" data-o="0"><span class="xq-oth xq-oic"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 6h16M4 12h16M4 18h10"/></svg></span><span class="xq-otx"><b>Sekskantbolt DIN 931</b><small>Delgjenget · 412 varianter</small></span><em class="xq-go">${XI.arrS}</em></div>
-                    <p class="xq-dh">Produkter</p>
-                    <div class="xq-opt" data-o="1"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×30 A4</b><small>A4 syrefast · 860 på lager</small></span><em class="in"></em></div>
-                    <div class="xq-opt" data-o="2"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×40 A4</b><small>A4 syrefast · 1 240 på lager</small></span><em class="in"></em></div>
-                    <div class="xq-opt" data-o="3"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×50 A4</b><small>A4 syrefast · 515 på lager</small></span><em class="in"></em></div>
-                    <div class="xq-opt" data-o="4"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×40 A2</b><small>A2 rustfri · bestillingsvare</small></span><em class="out"></em></div>
+                    <div class="xq-opt" data-o="0"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×30 A4</b><small>A4 syrefast · 860 på lager</small></span><em class="in"></em></div>
+                    <div class="xq-opt" data-o="1"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×40 A4</b><small>A4 syrefast · 1 240 på lager</small></span><em class="in"></em></div>
+                    <div class="xq-opt" data-o="2"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×50 A4</b><small>A4 syrefast · 515 på lager</small></span><em class="in"></em></div>
                   </div>
                   <div class="xq-pick">
                     <div class="xq-ph2"><span class="xq-pth ph ph-bolt_zinc"></span><span><b>Sekskantbolt DIN 931 M12×40 A4</b><small>04093107120040 · <i class="xq-ok">På lager (1 240)</i></small></span></div>
-                    <div class="xq-cfg">
-                      <div><p class="xq-cl">Antall (stk)</p><div class="xq-stp"><span class="xq-sb" data-b="minus">−</span><b class="xq-qty">1</b><span class="xq-sb" data-b="plus">+</span></div></div>
-                      <div><p class="xq-cl">Sertifikat</p><div class="xq-certs"><span>2.1</span><span class="xq-c31">3.1</span></div></div>
-                    </div>
+                    <div class="xq-chips"><span>200 stk</span><span>3.1-sertifikat</span><span>Levering i morgen</span></div>
                     <div class="xq-addb"><span class="xq-a1">Legg til i forespørsel</span><span class="xq-a2">${XI.check} Lagt i forespørsel</span></div>
                   </div>
                 </div>
@@ -3965,7 +3961,7 @@ function viewFixes(){
     'Søk: DIN, dimensjon, materiale …':'Search: DIN, size, material …','Kategori':'Category','Produkter':'Products','Delgjenget · 412 varianter':'Part thread · 412 variants',
     'A4 syrefast · 860 på lager':'A4 stainless · 860 in stock','A4 syrefast · 1 240 på lager':'A4 stainless · 1,240 in stock','A4 syrefast · 515 på lager':'A4 stainless · 515 in stock','A2 rustfri · bestillingsvare':'A2 stainless · made to order',
     'Sekskantbolt DIN 931 M12×40 A4':'Hex bolt DIN 931 M12×40 A4','På lager (1 240)':'In stock (1,240)','Antall (stk)':'Quantity (pcs)','Sertifikat':'Certificate','Legg til i forespørsel':'Add to request','Forespørsel':'Request',
-    'Tre veier':'Three ways','Produkt':'Product','Tegning':'Drawing','Liste':'List',
+    'Levering i morgen':'Delivery tomorrow','Tre veier':'Three ways','Produkt':'Product','Tegning':'Drawing','Liste':'List',
     'Vei 01 · Fra søk til forespørsel':'Route 01 · From search to request','Vei 02 · Fra skisse til riktig del':'Route 02 · From sketch to the right part','Vei 03 · Fra liste til ferdig pakke':'Route 03 · From list to a complete order',
     'Scroll for å se hvordan':'Scroll to see how','Sekskantbolt DIN 931':'Hex bolt DIN 931','M12×40 · A4 syrefast · 1 240 stk på lager':'M12×40 · A4 stainless · 1,240 in stock',
     '200 stk':'200 pcs','3.1-sertifikat':'3.1 certificate','Lagt i forespørsel':'Added to request','Mottatt':'Received','Teknisk selger':'Technical sales','Forslag klart innen 20 min':'Proposal ready within 20 min',
@@ -4041,11 +4037,11 @@ const XQ = (function(){
     const ov = [1, 2, 3].map(i => track.querySelector('.xq-ov' + i));
     const typeEl = track.querySelector('.xq-type'), typeText = typeEl.dataset.text;
     const o1el = ov[0], ui = o1el.querySelector('.xq-ui'), bar = o1el.querySelector('.xq-bar'), opts = [...o1el.querySelectorAll('.xq-opt')];
-    const qtyEl = o1el.querySelector('.xq-qty'), plusEl = o1el.querySelector('[data-b="plus"]'), c31 = o1el.querySelector('.xq-c31'), addB = o1el.querySelector('.xq-addb');
+    const addB = o1el.querySelector('.xq-addb');
     const cursor = o1el.querySelector('.xq-cursor'), rip = o1el.querySelector('.xq-rip'), badge = o1el.querySelector('.xq-badge'), badgeN = badge.querySelector('b');
     // where the cursor goes, as [progress, target]; targets are elements (centre) or [x%, y%] of the stage
-    const PATH = [[0.03, [0.86, 0.92]], [0.085, bar], [0.17, bar, 0.32], [0.2, opts[2]], [0.232, opts[2]], [0.252, plusEl], [0.262, plusEl], [0.27, c31], [0.276, c31], [0.284, addB], [0.31, [0.9, 0.95]]];
-    const CLICKS = [0.09, 0.224, 0.24, 0.247, 0.255, 0.272, 0.287];
+    const PATH = [[0.03, [0.86, 0.92]], [0.09, bar], [0.16, bar, 0.3], [0.205, opts[1]], [0.235, opts[1]], [0.262, addB], [0.31, [0.9, 0.95]]];
+    const CLICKS = [0.095, 0.226, 0.266];
     const ptOf = (t, dx) => { const R = o1el.getBoundingClientRect(); if(Array.isArray(t)) return [t[0] * R.width, t[1] * R.height]; const r = t.getBoundingClientRect(); return [r.left - R.left + r.width * (dx == null ? 0.5 : dx), r.top - R.top + r.height * 0.55]; };
     const listItems = [...track.querySelectorAll('.xq-list li')], foundEl = track.querySelector('[data-found]');
     const lblLen = track.querySelector('[data-dim="len"]'), lblDia = track.querySelector('[data-dim="dia"]');
@@ -4158,13 +4154,11 @@ const XQ = (function(){
       o1el.classList.toggle('s-focus', focused);
       typeEl.textContent = typeText.slice(0, Math.round(typeText.length * seg(p, 0.1, 0.16)));
       o1el.classList.toggle('s-typing', p > 0.1);
-      const ddOpen = p > 0.112 && p < 0.226;
+      const ddOpen = p > 0.115 && p < 0.228;
       o1el.classList.toggle('s-dd', ddOpen);
-      opts.forEach((o, i) => { o.classList.toggle('in', p > 0.118 + i * 0.011); o.classList.toggle('hov', i === 2 && p > 0.196 && p < 0.232); });
-      o1el.classList.toggle('s-pick', p > 0.226);
-      qtyEl.textContent = Math.max(1, Math.round(200 * ease(seg(p, 0.236, 0.258))));
-      c31.classList.toggle('on', p > 0.273);
-      const added = p > 0.288;
+      opts.forEach((o, i) => { o.classList.toggle('in', p > 0.122 + i * 0.016); o.classList.toggle('hov', i === 1 && p > 0.198 && p < 0.232); });
+      o1el.classList.toggle('s-pick', p > 0.228);
+      const added = p > 0.268;
       addB.classList.toggle('done', added);
       badgeN.textContent = added ? 1 : 0; badge.classList.toggle('on', added);
       // cursor

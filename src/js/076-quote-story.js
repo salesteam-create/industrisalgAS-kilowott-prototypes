@@ -27,11 +27,11 @@ const XQ = (function(){
     const ov = [1, 2, 3].map(i => track.querySelector('.xq-ov' + i));
     const typeEl = track.querySelector('.xq-type'), typeText = typeEl.dataset.text;
     const o1el = ov[0], ui = o1el.querySelector('.xq-ui'), bar = o1el.querySelector('.xq-bar'), opts = [...o1el.querySelectorAll('.xq-opt')];
-    const qtyEl = o1el.querySelector('.xq-qty'), plusEl = o1el.querySelector('[data-b="plus"]'), c31 = o1el.querySelector('.xq-c31'), addB = o1el.querySelector('.xq-addb');
+    const addB = o1el.querySelector('.xq-addb');
     const cursor = o1el.querySelector('.xq-cursor'), rip = o1el.querySelector('.xq-rip'), badge = o1el.querySelector('.xq-badge'), badgeN = badge.querySelector('b');
     // where the cursor goes, as [progress, target]; targets are elements (centre) or [x%, y%] of the stage
-    const PATH = [[0.03, [0.86, 0.92]], [0.085, bar], [0.17, bar, 0.32], [0.2, opts[2]], [0.232, opts[2]], [0.252, plusEl], [0.262, plusEl], [0.27, c31], [0.276, c31], [0.284, addB], [0.31, [0.9, 0.95]]];
-    const CLICKS = [0.09, 0.224, 0.24, 0.247, 0.255, 0.272, 0.287];
+    const PATH = [[0.03, [0.86, 0.92]], [0.09, bar], [0.16, bar, 0.3], [0.205, opts[1]], [0.235, opts[1]], [0.262, addB], [0.31, [0.9, 0.95]]];
+    const CLICKS = [0.095, 0.226, 0.266];
     const ptOf = (t, dx) => { const R = o1el.getBoundingClientRect(); if(Array.isArray(t)) return [t[0] * R.width, t[1] * R.height]; const r = t.getBoundingClientRect(); return [r.left - R.left + r.width * (dx == null ? 0.5 : dx), r.top - R.top + r.height * 0.55]; };
     const listItems = [...track.querySelectorAll('.xq-list li')], foundEl = track.querySelector('[data-found]');
     const lblLen = track.querySelector('[data-dim="len"]'), lblDia = track.querySelector('[data-dim="dia"]');
@@ -144,13 +144,11 @@ const XQ = (function(){
       o1el.classList.toggle('s-focus', focused);
       typeEl.textContent = typeText.slice(0, Math.round(typeText.length * seg(p, 0.1, 0.16)));
       o1el.classList.toggle('s-typing', p > 0.1);
-      const ddOpen = p > 0.112 && p < 0.226;
+      const ddOpen = p > 0.115 && p < 0.228;
       o1el.classList.toggle('s-dd', ddOpen);
-      opts.forEach((o, i) => { o.classList.toggle('in', p > 0.118 + i * 0.011); o.classList.toggle('hov', i === 2 && p > 0.196 && p < 0.232); });
-      o1el.classList.toggle('s-pick', p > 0.226);
-      qtyEl.textContent = Math.max(1, Math.round(200 * ease(seg(p, 0.236, 0.258))));
-      c31.classList.toggle('on', p > 0.273);
-      const added = p > 0.288;
+      opts.forEach((o, i) => { o.classList.toggle('in', p > 0.122 + i * 0.016); o.classList.toggle('hov', i === 1 && p > 0.198 && p < 0.232); });
+      o1el.classList.toggle('s-pick', p > 0.228);
+      const added = p > 0.268;
       addB.classList.toggle('done', added);
       badgeN.textContent = added ? 1 : 0; badge.classList.toggle('on', added);
       // cursor

@@ -241,20 +241,13 @@ function viewHome(){
                 <div class="xq-bar"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="xq-field"><span class="xq-ph">Søk: DIN, dimensjon, materiale …</span><span class="xq-type" data-text="din 931 m12"></span><i class="xq-caret"></i></span><kbd>/</kbd></div>
                 <div class="xq-area">
                   <div class="xq-dd">
-                    <p class="xq-dh">Kategori</p>
-                    <div class="xq-opt xq-cat" data-o="0"><span class="xq-oth xq-oic"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 6h16M4 12h16M4 18h10"/></svg></span><span class="xq-otx"><b>Sekskantbolt DIN 931</b><small>Delgjenget · 412 varianter</small></span><em class="xq-go">${XI.arrS}</em></div>
-                    <p class="xq-dh">Produkter</p>
-                    <div class="xq-opt" data-o="1"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×30 A4</b><small>A4 syrefast · 860 på lager</small></span><em class="in"></em></div>
-                    <div class="xq-opt" data-o="2"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×40 A4</b><small>A4 syrefast · 1 240 på lager</small></span><em class="in"></em></div>
-                    <div class="xq-opt" data-o="3"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×50 A4</b><small>A4 syrefast · 515 på lager</small></span><em class="in"></em></div>
-                    <div class="xq-opt" data-o="4"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×40 A2</b><small>A2 rustfri · bestillingsvare</small></span><em class="out"></em></div>
+                    <div class="xq-opt" data-o="0"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×30 A4</b><small>A4 syrefast · 860 på lager</small></span><em class="in"></em></div>
+                    <div class="xq-opt" data-o="1"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×40 A4</b><small>A4 syrefast · 1 240 på lager</small></span><em class="in"></em></div>
+                    <div class="xq-opt" data-o="2"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×50 A4</b><small>A4 syrefast · 515 på lager</small></span><em class="in"></em></div>
                   </div>
                   <div class="xq-pick">
                     <div class="xq-ph2"><span class="xq-pth ph ph-bolt_zinc"></span><span><b>Sekskantbolt DIN 931 M12×40 A4</b><small>04093107120040 · <i class="xq-ok">På lager (1 240)</i></small></span></div>
-                    <div class="xq-cfg">
-                      <div><p class="xq-cl">Antall (stk)</p><div class="xq-stp"><span class="xq-sb" data-b="minus">−</span><b class="xq-qty">1</b><span class="xq-sb" data-b="plus">+</span></div></div>
-                      <div><p class="xq-cl">Sertifikat</p><div class="xq-certs"><span>2.1</span><span class="xq-c31">3.1</span></div></div>
-                    </div>
+                    <div class="xq-chips"><span>200 stk</span><span>3.1-sertifikat</span><span>Levering i morgen</span></div>
                     <div class="xq-addb"><span class="xq-a1">Legg til i forespørsel</span><span class="xq-a2">${XI.check} Lagt i forespørsel</span></div>
                   </div>
                 </div>
@@ -472,7 +465,7 @@ function viewFixes(){
     'Søk: DIN, dimensjon, materiale …':'Search: DIN, size, material …','Kategori':'Category','Produkter':'Products','Delgjenget · 412 varianter':'Part thread · 412 variants',
     'A4 syrefast · 860 på lager':'A4 stainless · 860 in stock','A4 syrefast · 1 240 på lager':'A4 stainless · 1,240 in stock','A4 syrefast · 515 på lager':'A4 stainless · 515 in stock','A2 rustfri · bestillingsvare':'A2 stainless · made to order',
     'Sekskantbolt DIN 931 M12×40 A4':'Hex bolt DIN 931 M12×40 A4','På lager (1 240)':'In stock (1,240)','Antall (stk)':'Quantity (pcs)','Sertifikat':'Certificate','Legg til i forespørsel':'Add to request','Forespørsel':'Request',
-    'Tre veier':'Three ways','Produkt':'Product','Tegning':'Drawing','Liste':'List',
+    'Levering i morgen':'Delivery tomorrow','Tre veier':'Three ways','Produkt':'Product','Tegning':'Drawing','Liste':'List',
     'Vei 01 · Fra søk til forespørsel':'Route 01 · From search to request','Vei 02 · Fra skisse til riktig del':'Route 02 · From sketch to the right part','Vei 03 · Fra liste til ferdig pakke':'Route 03 · From list to a complete order',
     'Scroll for å se hvordan':'Scroll to see how','Sekskantbolt DIN 931':'Hex bolt DIN 931','M12×40 · A4 syrefast · 1 240 stk på lager':'M12×40 · A4 stainless · 1,240 in stock',
     '200 stk':'200 pcs','3.1-sertifikat':'3.1 certificate','Lagt i forespørsel':'Added to request','Mottatt':'Received','Teknisk selger':'Technical sales','Forslag klart innen 20 min':'Proposal ready within 20 min',
