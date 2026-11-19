@@ -226,7 +226,7 @@ function viewHome(){
               <li><button type="button" data-xq="2"><i><b></b></i><span>03</span>Liste</button></li>
             </ol>
             <div class="xq-steps">
-              <article class="xq-step on" data-step="0"><p class="xq-k">Vei 01 · Fra idé til forespørsel</p><h3>Jeg vet hva jeg trenger</h3><p>Finn produktene, velg antall og sertifikat, og send alt i én forespørsel.</p><a class="x-btn x-btn-blue" href="#/kategori/skruer-bolter">Finn produkter ${XI.arr}</a></article>
+              <article class="xq-step on" data-step="0"><p class="xq-k">Vei 01 · Fra søk til forespørsel</p><h3>Jeg vet hva jeg trenger</h3><p>Finn produktene, velg antall og sertifikat, og send alt i én forespørsel.</p><a class="x-btn x-btn-blue" href="#/kategori/skruer-bolter">Finn produkter ${XI.arr}</a></article>
               <article class="xq-step" data-step="1"><p class="xq-k">Vei 02 · Fra skisse til riktig del</p><h3>Jeg har en tegning eller en gammel del</h3><p>Send tegning, bilde eller mål. En teknisk selger finner riktig produkt.</p><a class="x-btn x-btn-blue" href="#/spesialprodukt">Send spesifikasjon ${XI.arr}</a></article>
               <article class="xq-step" data-step="2"><p class="xq-k">Vei 03 · Fra liste til ferdig pakke</p><h3>Jeg har en innkjøpsliste</h3><p>Lange lister fra innkjøp eller stykkliste (BOM). Vi matcher linjene mot lageret.</p><a class="x-btn x-btn-blue" href="#/hurtigordre">Last opp liste ${XI.arr}</a></article>
             </div>
@@ -236,11 +236,30 @@ function viewHome(){
             <div class="xq-grid" aria-hidden="true"></div>
             <div class="xq-canvas" id="xqcanvas" aria-hidden="true"></div>
             <div class="xq-ov xq-ov1" aria-hidden="true">
-              <div class="xq-card xq-search">
-                <div class="xq-in"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="xq-type" data-text="DIN 931 M12×40 A4"></span><i class="xq-caret"></i></div>
-                <div class="xq-res"><span class="xq-thumb ph ph-bolt_zinc"></span><span><b>Sekskantbolt DIN 931</b><small>M12×40 · A4 syrefast · 1 240 stk på lager</small></span></div>
-                <div class="xq-opts"><span>200 stk</span><span>3.1-sertifikat</span><span class="xq-added">${XI.check} Lagt i forespørsel</span></div>
+              <div class="xq-badge"><svg width="15" height="15" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"/></svg>Forespørsel <b>0</b></div>
+              <div class="xq-ui">
+                <div class="xq-bar"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="xq-field"><span class="xq-ph">Søk: DIN, dimensjon, materiale …</span><span class="xq-type" data-text="din 931 m12"></span><i class="xq-caret"></i></span><kbd>/</kbd></div>
+                <div class="xq-area">
+                  <div class="xq-dd">
+                    <p class="xq-dh">Kategori</p>
+                    <div class="xq-opt xq-cat" data-o="0"><span class="xq-oth xq-oic"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 6h16M4 12h16M4 18h10"/></svg></span><span class="xq-otx"><b>Sekskantbolt DIN 931</b><small>Delgjenget · 412 varianter</small></span><em class="xq-go">${XI.arrS}</em></div>
+                    <p class="xq-dh">Produkter</p>
+                    <div class="xq-opt" data-o="1"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×30 A4</b><small>A4 syrefast · 860 på lager</small></span><em class="in"></em></div>
+                    <div class="xq-opt" data-o="2"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×40 A4</b><small>A4 syrefast · 1 240 på lager</small></span><em class="in"></em></div>
+                    <div class="xq-opt" data-o="3"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×50 A4</b><small>A4 syrefast · 515 på lager</small></span><em class="in"></em></div>
+                    <div class="xq-opt" data-o="4"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×40 A2</b><small>A2 rustfri · bestillingsvare</small></span><em class="out"></em></div>
+                  </div>
+                  <div class="xq-pick">
+                    <div class="xq-ph2"><span class="xq-pth ph ph-bolt_zinc"></span><span><b>Sekskantbolt DIN 931 M12×40 A4</b><small>04093107120040 · <i class="xq-ok">På lager (1 240)</i></small></span></div>
+                    <div class="xq-cfg">
+                      <div><p class="xq-cl">Antall (stk)</p><div class="xq-stp"><span class="xq-sb" data-b="minus">−</span><b class="xq-qty">1</b><span class="xq-sb" data-b="plus">+</span></div></div>
+                      <div><p class="xq-cl">Sertifikat</p><div class="xq-certs"><span>2.1</span><span class="xq-c31">3.1</span></div></div>
+                    </div>
+                    <div class="xq-addb"><span class="xq-a1">Legg til i forespørsel</span><span class="xq-a2">${XI.check} Lagt i forespørsel</span></div>
+                  </div>
+                </div>
               </div>
+              <div class="xq-cursor"><i class="xq-rip"></i><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#0b1f4d" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
             </div>
             <div class="xq-ov xq-ov2" aria-hidden="true">
               <span class="xq-lbl" data-dim="len">L 40</span><span class="xq-lbl" data-dim="dia">M12</span>
@@ -450,8 +469,11 @@ function viewFixes(){
     'Prøv med en eksempelliste':'Try with an example list','Min konto':'My account','Logg inn':'Log in',
     'Funnet':'Found','Velg variant':'Choose variant','Tekniker':'Technician','Sendes til tekniker':'Sent to a technician',
     'Velkommen tilbake, Eksempel Verksted AS':'Welcome back, Eksempel Verksted AS','Bestill på nytt':'Reorder',
+    'Søk: DIN, dimensjon, materiale …':'Search: DIN, size, material …','Kategori':'Category','Produkter':'Products','Delgjenget · 412 varianter':'Part thread · 412 variants',
+    'A4 syrefast · 860 på lager':'A4 stainless · 860 in stock','A4 syrefast · 1 240 på lager':'A4 stainless · 1,240 in stock','A4 syrefast · 515 på lager':'A4 stainless · 515 in stock','A2 rustfri · bestillingsvare':'A2 stainless · made to order',
+    'Sekskantbolt DIN 931 M12×40 A4':'Hex bolt DIN 931 M12×40 A4','På lager (1 240)':'In stock (1,240)','Antall (stk)':'Quantity (pcs)','Sertifikat':'Certificate','Legg til i forespørsel':'Add to request','Forespørsel':'Request',
     'Tre veier':'Three ways','Produkt':'Product','Tegning':'Drawing','Liste':'List',
-    'Vei 01 · Fra idé til forespørsel':'Route 01 · From idea to request','Vei 02 · Fra skisse til riktig del':'Route 02 · From sketch to the right part','Vei 03 · Fra liste til ferdig pakke':'Route 03 · From list to a complete order',
+    'Vei 01 · Fra søk til forespørsel':'Route 01 · From search to request','Vei 02 · Fra skisse til riktig del':'Route 02 · From sketch to the right part','Vei 03 · Fra liste til ferdig pakke':'Route 03 · From list to a complete order',
     'Scroll for å se hvordan':'Scroll to see how','Sekskantbolt DIN 931':'Hex bolt DIN 931','M12×40 · A4 syrefast · 1 240 stk på lager':'M12×40 · A4 stainless · 1,240 in stock',
     '200 stk':'200 pcs','3.1-sertifikat':'3.1 certificate','Lagt i forespørsel':'Added to request','Mottatt':'Received','Teknisk selger':'Technical sales','Forslag klart innen 20 min':'Proposal ready within 20 min',
     'av 3 linjer matchet mot lager':'of 3 lines matched to stock',

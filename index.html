@@ -1579,6 +1579,70 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--c
 .xq-lf { margin: 8px 0 0; padding-top: 10px; border-top: 1px solid var(--c-line); font-size: .8rem; color: var(--c-mute); }
 .xq-lf b { color: var(--c-blue); }
 
+/* ===== Quote story, route 01: search UI ===== */
+.xq-ov1 { opacity: 0; }
+.xq-ui { position: absolute; left: 50%; top: 13%; width: min(520px, calc(100% - 64px)); transform-origin: 50% 0; will-change: transform; }
+.xq-bar { display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 18px; border-radius: 16px; background: #fff; border: 1.5px solid var(--c-line); color: var(--c-mute); box-shadow: 0 1px 2px rgba(15,23,42,.05), 0 24px 50px -28px rgba(15,23,42,.35); transition: border-color .3s, box-shadow .3s; }
+.s-focus .xq-bar { border-color: var(--c-blue); box-shadow: 0 0 0 4px rgba(29,78,216,.12), 0 24px 50px -28px rgba(15,23,42,.35); }
+.xq-field { flex: 1; display: flex; align-items: center; min-width: 0; font-size: 1.05rem; position: relative; }
+.xq-ph { color: #9aa6bb; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.s-typing .xq-ph { display: none; }
+.xq-ov1 .xq-type { color: var(--c-ink); font-weight: 500; white-space: nowrap; }
+.xq-ov1 .xq-caret { width: 2px; height: 22px; margin-left: 2px; background: var(--c-blue); opacity: 0; }
+.s-focus .xq-caret { animation: xqcaret 1s steps(1) infinite; opacity: 1; }
+.xq-bar kbd { font: inherit; font-size: .75rem; color: var(--c-mute); border: 1px solid var(--c-line); border-radius: 6px; padding: 2px 7px; }
+.xq-area { position: relative; margin-top: 10px; }
+.xq-dd, .xq-pick { position: absolute; left: 0; right: 0; top: 0; background: #fff; border: 1px solid var(--c-line); border-radius: 18px; box-shadow: 0 1px 2px rgba(15,23,42,.05), 0 30px 60px -30px rgba(15,23,42,.38); transform-origin: 50% 0; transition: opacity .35s var(--ease), transform .45s var(--ease); }
+.xq-dd { padding: 8px; opacity: 0; transform: translateY(-8px) scale(.98); pointer-events: none; }
+.s-dd .xq-dd { opacity: 1; transform: none; }
+.xq-dh { margin: 8px 12px 4px; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--c-mute); }
+.xq-opt { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .35s var(--ease), background .2s; }
+.xq-opt.in { opacity: 1; transform: none; }
+.xq-opt.hov { background: var(--c-blue-soft); }
+.xq-opt.hov b { color: var(--c-blue); }
+.xq-oth { width: 40px; height: 40px; border-radius: 10px; flex: none; border: 1px solid var(--c-line); background-color: #fff; background-size: 82%; }
+.xq-oic { display: flex; align-items: center; justify-content: center; color: var(--c-blue); background: var(--c-blue-soft); border-color: transparent; }
+.xq-otx { flex: 1; min-width: 0; }
+.xq-otx b { display: block; font-size: .95rem; font-weight: 600; color: var(--c-ink); transition: color .2s; }
+.xq-otx small { font-size: .8rem; color: var(--c-mute); }
+.xq-opt em { width: 9px; height: 9px; border-radius: 50%; flex: none; margin-right: 6px; }
+.xq-opt em.in { background: #22a35a; box-shadow: 0 0 0 3px rgba(34,163,90,.15); }
+.xq-opt em.out { background: #e0a100; box-shadow: 0 0 0 3px rgba(224,161,0,.15); }
+.xq-opt em.xq-go { width: auto; height: auto; border-radius: 0; color: var(--c-blue); display: flex; }
+.xq-pick { padding: 18px; opacity: 0; transform: translateY(14px) scale(.97); }
+.s-pick .xq-pick { opacity: 1; transform: none; }
+.xq-ph2 { display: flex; align-items: center; gap: 14px; padding-bottom: 16px; border-bottom: 1px solid var(--c-line); }
+.xq-pth { width: 64px; height: 64px; border-radius: 14px; border: 1px solid var(--c-line); background-color: #fff; background-size: 84%; flex: none; }
+.xq-ph2 b { display: block; font-size: 1.02rem; font-weight: 600; color: var(--c-ink); line-height: 1.3; }
+.xq-ph2 small { font-size: .8rem; color: var(--c-mute); }
+.xq-ok { font-style: normal; color: #11804a; font-weight: 500; }
+.xq-cfg { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px 0; }
+.xq-cl { margin: 0 0 8px; font-size: .78rem; color: var(--c-mute); font-weight: 500; }
+.xq-stp { display: inline-flex; align-items: center; border: 1px solid var(--c-line); border-radius: 12px; height: 44px; }
+.xq-sb { width: 40px; text-align: center; color: var(--c-ink-2); font-size: 1.1rem; }
+.xq-qty { min-width: 52px; text-align: center; font-weight: 600; color: var(--c-ink); font-variant-numeric: tabular-nums; }
+.xq-certs { display: flex; gap: 8px; }
+.xq-certs span { height: 44px; min-width: 64px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--c-line); border-radius: 12px; font-weight: 600; font-size: .92rem; color: var(--c-ink-2); background: #fff; }
+.xq-certs span:first-child { border-color: var(--c-blue); color: var(--c-blue); background: var(--c-blue-soft); }
+.xq-certs .xq-c31 { transition: background .25s, color .25s, border-color .25s; }
+.xq-certs .xq-c31.on { border-color: var(--c-blue); color: #fff; background: var(--c-blue); }
+.xq-addb { position: relative; height: 50px; border-radius: 12px; background: var(--c-blue); color: #fff; font-weight: 600; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: background .35s; }
+.xq-addb span { position: absolute; display: inline-flex; align-items: center; gap: 8px; transition: transform .45s var(--ease), opacity .3s; }
+.xq-addb .xq-a2 { transform: translateY(26px); opacity: 0; }
+.xq-addb.done { background: #16884e; }
+.xq-addb.done .xq-a1 { transform: translateY(-26px); opacity: 0; }
+.xq-addb.done .xq-a2 { transform: none; opacity: 1; }
+.xq-addb svg { width: 16px; height: 16px; }
+.xq-badge { position: absolute; right: 24px; top: 22px; display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 8px 0 14px; border-radius: 999px; background: #fff; border: 1px solid var(--c-line); font-size: .86rem; font-weight: 600; color: var(--c-ink); box-shadow: 0 10px 24px -16px rgba(15,23,42,.35); }
+.xq-badge b { min-width: 24px; height: 24px; border-radius: 999px; background: var(--c-soft); color: var(--c-mute); display: inline-flex; align-items: center; justify-content: center; font-size: .8rem; transition: background .3s, color .3s, transform .4s var(--ease); }
+.xq-badge.on b { background: var(--c-blue); color: #fff; animation: xqbump .5s var(--ease); }
+@keyframes xqbump { 40% { transform: scale(1.35); } }
+.xq-cursor { position: absolute; left: 0; top: 0; width: 0; height: 0; opacity: 0; will-change: transform; z-index: 3; }
+.xq-cursor svg { position: absolute; left: -4px; top: -3px; filter: drop-shadow(0 3px 6px rgba(11,31,77,.3)); }
+.xq-rip { position: absolute; left: -18px; top: -18px; width: 36px; height: 36px; border-radius: 50%; background: rgba(29,78,216,.25); opacity: 0; }
+.xq-certs:has(.xq-c31.on) span:first-child { border-color: var(--c-line); color: var(--c-ink-2); background: #fff; }
+.xq-cursor svg { width: 26px; height: 26px; min-width: 26px; max-width: none; }
+
 /* =====================================================================
    INDUSTRISALG 2.0 CONCEPT · Inner pages (light)
    ===================================================================== */
@@ -3655,7 +3719,7 @@ function viewHome(){
               <li><button type="button" data-xq="2"><i><b></b></i><span>03</span>Liste</button></li>
             </ol>
             <div class="xq-steps">
-              <article class="xq-step on" data-step="0"><p class="xq-k">Vei 01 · Fra idé til forespørsel</p><h3>Jeg vet hva jeg trenger</h3><p>Finn produktene, velg antall og sertifikat, og send alt i én forespørsel.</p><a class="x-btn x-btn-blue" href="#/kategori/skruer-bolter">Finn produkter ${XI.arr}</a></article>
+              <article class="xq-step on" data-step="0"><p class="xq-k">Vei 01 · Fra søk til forespørsel</p><h3>Jeg vet hva jeg trenger</h3><p>Finn produktene, velg antall og sertifikat, og send alt i én forespørsel.</p><a class="x-btn x-btn-blue" href="#/kategori/skruer-bolter">Finn produkter ${XI.arr}</a></article>
               <article class="xq-step" data-step="1"><p class="xq-k">Vei 02 · Fra skisse til riktig del</p><h3>Jeg har en tegning eller en gammel del</h3><p>Send tegning, bilde eller mål. En teknisk selger finner riktig produkt.</p><a class="x-btn x-btn-blue" href="#/spesialprodukt">Send spesifikasjon ${XI.arr}</a></article>
               <article class="xq-step" data-step="2"><p class="xq-k">Vei 03 · Fra liste til ferdig pakke</p><h3>Jeg har en innkjøpsliste</h3><p>Lange lister fra innkjøp eller stykkliste (BOM). Vi matcher linjene mot lageret.</p><a class="x-btn x-btn-blue" href="#/hurtigordre">Last opp liste ${XI.arr}</a></article>
             </div>
@@ -3665,11 +3729,30 @@ function viewHome(){
             <div class="xq-grid" aria-hidden="true"></div>
             <div class="xq-canvas" id="xqcanvas" aria-hidden="true"></div>
             <div class="xq-ov xq-ov1" aria-hidden="true">
-              <div class="xq-card xq-search">
-                <div class="xq-in"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="xq-type" data-text="DIN 931 M12×40 A4"></span><i class="xq-caret"></i></div>
-                <div class="xq-res"><span class="xq-thumb ph ph-bolt_zinc"></span><span><b>Sekskantbolt DIN 931</b><small>M12×40 · A4 syrefast · 1 240 stk på lager</small></span></div>
-                <div class="xq-opts"><span>200 stk</span><span>3.1-sertifikat</span><span class="xq-added">${XI.check} Lagt i forespørsel</span></div>
+              <div class="xq-badge"><svg width="15" height="15" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"/></svg>Forespørsel <b>0</b></div>
+              <div class="xq-ui">
+                <div class="xq-bar"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="xq-field"><span class="xq-ph">Søk: DIN, dimensjon, materiale …</span><span class="xq-type" data-text="din 931 m12"></span><i class="xq-caret"></i></span><kbd>/</kbd></div>
+                <div class="xq-area">
+                  <div class="xq-dd">
+                    <p class="xq-dh">Kategori</p>
+                    <div class="xq-opt xq-cat" data-o="0"><span class="xq-oth xq-oic"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 6h16M4 12h16M4 18h10"/></svg></span><span class="xq-otx"><b>Sekskantbolt DIN 931</b><small>Delgjenget · 412 varianter</small></span><em class="xq-go">${XI.arrS}</em></div>
+                    <p class="xq-dh">Produkter</p>
+                    <div class="xq-opt" data-o="1"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×30 A4</b><small>A4 syrefast · 860 på lager</small></span><em class="in"></em></div>
+                    <div class="xq-opt" data-o="2"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×40 A4</b><small>A4 syrefast · 1 240 på lager</small></span><em class="in"></em></div>
+                    <div class="xq-opt" data-o="3"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×50 A4</b><small>A4 syrefast · 515 på lager</small></span><em class="in"></em></div>
+                    <div class="xq-opt" data-o="4"><span class="xq-oth ph ph-bolt_zinc"></span><span class="xq-otx"><b>DIN 931 M12×40 A2</b><small>A2 rustfri · bestillingsvare</small></span><em class="out"></em></div>
+                  </div>
+                  <div class="xq-pick">
+                    <div class="xq-ph2"><span class="xq-pth ph ph-bolt_zinc"></span><span><b>Sekskantbolt DIN 931 M12×40 A4</b><small>04093107120040 · <i class="xq-ok">På lager (1 240)</i></small></span></div>
+                    <div class="xq-cfg">
+                      <div><p class="xq-cl">Antall (stk)</p><div class="xq-stp"><span class="xq-sb" data-b="minus">−</span><b class="xq-qty">1</b><span class="xq-sb" data-b="plus">+</span></div></div>
+                      <div><p class="xq-cl">Sertifikat</p><div class="xq-certs"><span>2.1</span><span class="xq-c31">3.1</span></div></div>
+                    </div>
+                    <div class="xq-addb"><span class="xq-a1">Legg til i forespørsel</span><span class="xq-a2">${XI.check} Lagt i forespørsel</span></div>
+                  </div>
+                </div>
               </div>
+              <div class="xq-cursor"><i class="xq-rip"></i><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#0b1f4d" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
             </div>
             <div class="xq-ov xq-ov2" aria-hidden="true">
               <span class="xq-lbl" data-dim="len">L 40</span><span class="xq-lbl" data-dim="dia">M12</span>
@@ -3879,8 +3962,11 @@ function viewFixes(){
     'Prøv med en eksempelliste':'Try with an example list','Min konto':'My account','Logg inn':'Log in',
     'Funnet':'Found','Velg variant':'Choose variant','Tekniker':'Technician','Sendes til tekniker':'Sent to a technician',
     'Velkommen tilbake, Eksempel Verksted AS':'Welcome back, Eksempel Verksted AS','Bestill på nytt':'Reorder',
+    'Søk: DIN, dimensjon, materiale …':'Search: DIN, size, material …','Kategori':'Category','Produkter':'Products','Delgjenget · 412 varianter':'Part thread · 412 variants',
+    'A4 syrefast · 860 på lager':'A4 stainless · 860 in stock','A4 syrefast · 1 240 på lager':'A4 stainless · 1,240 in stock','A4 syrefast · 515 på lager':'A4 stainless · 515 in stock','A2 rustfri · bestillingsvare':'A2 stainless · made to order',
+    'Sekskantbolt DIN 931 M12×40 A4':'Hex bolt DIN 931 M12×40 A4','På lager (1 240)':'In stock (1,240)','Antall (stk)':'Quantity (pcs)','Sertifikat':'Certificate','Legg til i forespørsel':'Add to request','Forespørsel':'Request',
     'Tre veier':'Three ways','Produkt':'Product','Tegning':'Drawing','Liste':'List',
-    'Vei 01 · Fra idé til forespørsel':'Route 01 · From idea to request','Vei 02 · Fra skisse til riktig del':'Route 02 · From sketch to the right part','Vei 03 · Fra liste til ferdig pakke':'Route 03 · From list to a complete order',
+    'Vei 01 · Fra søk til forespørsel':'Route 01 · From search to request','Vei 02 · Fra skisse til riktig del':'Route 02 · From sketch to the right part','Vei 03 · Fra liste til ferdig pakke':'Route 03 · From list to a complete order',
     'Scroll for å se hvordan':'Scroll to see how','Sekskantbolt DIN 931':'Hex bolt DIN 931','M12×40 · A4 syrefast · 1 240 stk på lager':'M12×40 · A4 stainless · 1,240 in stock',
     '200 stk':'200 pcs','3.1-sertifikat':'3.1 certificate','Lagt i forespørsel':'Added to request','Mottatt':'Received','Teknisk selger':'Technical sales','Forslag klart innen 20 min':'Proposal ready within 20 min',
     'av 3 linjer matchet mot lager':'of 3 lines matched to stock',
@@ -3929,7 +4015,7 @@ function viewFixes(){
 /* =====================================================================
    INDUSTRISALG 2.0 CONCEPT · "Tre veier til riktig tilbud" scroll story
    A pinned stage driven by scroll progress (0..1):
-     Route 1  question mark "idea" + search card that finds the part
+     Route 1  search UI: cursor opens search, types, picks a product, adds it
      Route 2  wireframe bolt sketches itself, gets dimensions, turns solid
      Route 3  purchase list ticks off while washer and nut thread on
    Falls back to the plain three cards on small screens, without WebGL
@@ -3946,19 +4032,6 @@ const XQ = (function(){
     return typeof X3D !== 'undefined' && X3D.ok && !X3D.reduced() && window.matchMedia('(min-width: 901px)').matches;
   }
 
-  function questionMark(){
-    const g = new THREE.Group();
-    const mat = new THREE.MeshStandardMaterial({ color: 0x2563eb, metalness: 0.35, roughness: 0.22, envMapIntensity: 1.3, transparent: true });
-    const pts = [[-0.78, 0.95], [-0.62, 1.55], [0, 1.85], [0.66, 1.56], [0.8, 0.98], [0.45, 0.45], [0.06, 0.12], [0, -0.42]].map(([x, y]) => new THREE.Vector3(x, y, 0));
-    const curve = new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.5);
-    g.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 120, 0.21, 24, false), mat));
-    const cap = new THREE.Mesh(new THREE.SphereGeometry(0.21, 24, 16), mat); cap.position.copy(pts[0]); g.add(cap);
-    const cap2 = cap.clone(); cap2.position.copy(pts[pts.length - 1]); g.add(cap2);
-    const dot = new THREE.Mesh(new THREE.SphereGeometry(0.27, 32, 20), mat); dot.position.set(0, -1.08, 0); g.add(dot);
-    g.position.y = -0.35;
-    return { g, mat };
-  }
-
   function mount(root){
     const track = root.querySelector('#xqtrack'), host = root.querySelector('#xqcanvas');
     if(!track || !host || !usable()) return null;
@@ -3967,6 +4040,13 @@ const XQ = (function(){
     const steps = [...track.querySelectorAll('.xq-step')], rail = [...track.querySelectorAll('.xq-rail button')];
     const ov = [1, 2, 3].map(i => track.querySelector('.xq-ov' + i));
     const typeEl = track.querySelector('.xq-type'), typeText = typeEl.dataset.text;
+    const o1el = ov[0], ui = o1el.querySelector('.xq-ui'), bar = o1el.querySelector('.xq-bar'), opts = [...o1el.querySelectorAll('.xq-opt')];
+    const qtyEl = o1el.querySelector('.xq-qty'), plusEl = o1el.querySelector('[data-b="plus"]'), c31 = o1el.querySelector('.xq-c31'), addB = o1el.querySelector('.xq-addb');
+    const cursor = o1el.querySelector('.xq-cursor'), rip = o1el.querySelector('.xq-rip'), badge = o1el.querySelector('.xq-badge'), badgeN = badge.querySelector('b');
+    // where the cursor goes, as [progress, target]; targets are elements (centre) or [x%, y%] of the stage
+    const PATH = [[0.03, [0.86, 0.92]], [0.085, bar], [0.17, bar, 0.32], [0.2, opts[2]], [0.232, opts[2]], [0.252, plusEl], [0.262, plusEl], [0.27, c31], [0.276, c31], [0.284, addB], [0.31, [0.9, 0.95]]];
+    const CLICKS = [0.09, 0.224, 0.24, 0.247, 0.255, 0.272, 0.287];
+    const ptOf = (t, dx) => { const R = o1el.getBoundingClientRect(); if(Array.isArray(t)) return [t[0] * R.width, t[1] * R.height]; const r = t.getBoundingClientRect(); return [r.left - R.left + r.width * (dx == null ? 0.5 : dx), r.top - R.top + r.height * 0.55]; };
     const listItems = [...track.querySelectorAll('.xq-list li')], foundEl = track.querySelector('[data-found]');
     const lblLen = track.querySelector('[data-dim="len"]'), lblDia = track.querySelector('[data-dim="dia"]');
 
@@ -3982,16 +4062,6 @@ const XQ = (function(){
     const rim = new THREE.DirectionalLight(0xffffff, 1.1); rim.position.set(-2, 3, -5); scene.add(rim);
     scene.add(new THREE.AmbientLight(0xffffff, 0.35));
     const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-
-    // ---- route 1: the idea
-    const idea = new THREE.Group(); scene.add(idea);
-    const qm = questionMark(); idea.add(qm.g);
-    const haloMat = new THREE.LineBasicMaterial({ color: 0x3b6cf0, transparent: true, opacity: 0.22, depthWrite: false });
-    const halo = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.25, 1)), haloMat); idea.add(halo);
-    const sparkMat = new THREE.PointsMaterial({ color: 0x2563eb, size: 0.07, transparent: true, opacity: 0.6, depthWrite: false });
-    const sp = new Float32Array(90 * 3); for(let i = 0; i < 90; i++){ const r = 2.6 + Math.random() * 0.9, a = Math.random() * Math.PI * 2, b = Math.acos(2 * Math.random() - 1); sp.set([r * Math.sin(b) * Math.cos(a), r * Math.cos(b), r * Math.sin(b) * Math.sin(a)], i * 3); }
-    const sparkGeo = new THREE.BufferGeometry(); sparkGeo.setAttribute('position', new THREE.BufferAttribute(sp, 3));
-    const sparks = new THREE.Points(sparkGeo, sparkMat); idea.add(sparks);
 
     // ---- route 2 + 3: the part (axis along Y, head on top)
     const part = new THREE.Group(); scene.add(part);
@@ -4050,18 +4120,6 @@ const XQ = (function(){
 
     function apply(time){
       const T = (time - t0) / 1000;
-      // ---------- route 1: idea (0 .. 0.36)
-      const inA = easeOut(seg(p, 0, 0.06)), outA = ease(seg(p, 0.28, 0.37));
-      const ideaV = inA * (1 - outA);
-      idea.visible = ideaV > 0.01;
-      idea.scale.setScalar((0.75 + 0.25 * inA) * (1 - 0.55 * outA));
-      idea.position.set(0.75, 0.25 + Math.sin(T * 1.3) * 0.08 + outA * 0.6, 0);
-      qm.g.rotation.y = Math.sin(T * 0.7) * 0.4 + Math.sin(p * 9) * 0.25;
-      halo.rotation.set(T * 0.08, -T * 0.12 - p * 2, 0);
-      sparks.rotation.y = T * 0.05 + p * 1.5;
-      qm.mat.opacity = ideaV; haloMat.opacity = 0.22 * ideaV; sparkMat.opacity = 0.55 * ideaV * (1 + outA * 1.5);
-      sparkMat.size = 0.07 + outA * 0.08;
-
       // ---------- route 2: sketch draws, dimensions, turns solid (0.33 .. 0.66)
       const draw = ease(seg(p, 0.34, 0.52));
       let budget = draw * total;
@@ -4092,11 +4150,33 @@ const XQ = (function(){
       fadeMats.forEach((m, i) => { m.opacity = clamp((i < 1 ? wIn : nIn) * 3, 0, 1); });
 
       // ---------- HTML overlays
-      const o1 = seg(p, 0.03, 0.08) * (1 - seg(p, 0.28, 0.33));
-      ov[0].style.opacity = o1; ov[0].style.transform = `translateY(${(1 - o1) * 16}px)`;
-      const typed = Math.round(typeText.length * seg(p, 0.07, 0.17));
-      typeEl.textContent = typeText.slice(0, typed);
-      ov[0].classList.toggle('s-res', p > 0.18); ov[0].classList.toggle('s-opt', p > 0.22); ov[0].classList.toggle('s-add', p > 0.26);
+      // route 1: search bar pops up, cursor clicks, types, picks, configures, adds
+      const pop = easeOut(seg(p, 0.012, 0.06)), out1 = ease(seg(p, 0.295, 0.335));
+      o1el.style.opacity = Math.min(1, pop * 1.4) * (1 - out1);
+      ui.style.transform = `translate(-50%, ${(1 - pop) * 26 - out1 * 34}px) scale(${0.94 + 0.06 * pop})`;
+      const focused = p > 0.092;
+      o1el.classList.toggle('s-focus', focused);
+      typeEl.textContent = typeText.slice(0, Math.round(typeText.length * seg(p, 0.1, 0.16)));
+      o1el.classList.toggle('s-typing', p > 0.1);
+      const ddOpen = p > 0.112 && p < 0.226;
+      o1el.classList.toggle('s-dd', ddOpen);
+      opts.forEach((o, i) => { o.classList.toggle('in', p > 0.118 + i * 0.011); o.classList.toggle('hov', i === 2 && p > 0.196 && p < 0.232); });
+      o1el.classList.toggle('s-pick', p > 0.226);
+      qtyEl.textContent = Math.max(1, Math.round(200 * ease(seg(p, 0.236, 0.258))));
+      c31.classList.toggle('on', p > 0.273);
+      const added = p > 0.288;
+      addB.classList.toggle('done', added);
+      badgeN.textContent = added ? 1 : 0; badge.classList.toggle('on', added);
+      // cursor
+      let k = 0; while(k < PATH.length - 2 && p > PATH[k + 1][0]) k++;
+      const A = PATH[k], B = PATH[k + 1], f = ease(seg(p, A[0], B[0]));
+      const pa = ptOf(A[1], A[2]), pb = ptOf(B[1], B[2]);
+      const cx = pa[0] + (pb[0] - pa[0]) * f, cy = pa[1] + (pb[1] - pa[1]) * f;
+      let press = 0; CLICKS.forEach(c => { press = Math.max(press, 1 - Math.abs(p - c) / 0.0045); });
+      press = Math.max(0, press);
+      cursor.style.opacity = seg(p, 0.03, 0.045) * (1 - seg(p, 0.3, 0.315));
+      cursor.style.transform = `translate(${cx}px, ${cy}px) scale(${1 - press * 0.16})`;
+      rip.style.opacity = press * 0.9; rip.style.transform = `scale(${0.4 + (1 - press) * 1.4})`;
 
       const o2 = seg(p, 0.4, 0.45) * (1 - seg(p, 0.63, 0.67));
       ov[1].style.opacity = o2;

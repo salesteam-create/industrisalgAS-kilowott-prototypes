@@ -1,7 +1,7 @@
 /* =====================================================================
    INDUSTRISALG 2.0 CONCEPT · "Tre veier til riktig tilbud" scroll story
    A pinned stage driven by scroll progress (0..1):
-     Route 1  question mark "idea" + search card that finds the part
+     Route 1  search UI: cursor opens search, types, picks a product, adds it
      Route 2  wireframe bolt sketches itself, gets dimensions, turns solid
      Route 3  purchase list ticks off while washer and nut thread on
    Falls back to the plain three cards on small screens, without WebGL
@@ -18,19 +18,6 @@ const XQ = (function(){
     return typeof X3D !== 'undefined' && X3D.ok && !X3D.reduced() && window.matchMedia('(min-width: 901px)').matches;
   }
 
-  function questionMark(){
-    const g = new THREE.Group();
-    const mat = new THREE.MeshStandardMaterial({ color: 0x2563eb, metalness: 0.35, roughness: 0.22, envMapIntensity: 1.3, transparent: true });
-    const pts = [[-0.78, 0.95], [-0.62, 1.55], [0, 1.85], [0.66, 1.56], [0.8, 0.98], [0.45, 0.45], [0.06, 0.12], [0, -0.42]].map(([x, y]) => new THREE.Vector3(x, y, 0));
-    const curve = new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.5);
-    g.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 120, 0.21, 24, false), mat));
-    const cap = new THREE.Mesh(new THREE.SphereGeometry(0.21, 24, 16), mat); cap.position.copy(pts[0]); g.add(cap);
-    const cap2 = cap.clone(); cap2.position.copy(pts[pts.length - 1]); g.add(cap2);
-    const dot = new THREE.Mesh(new THREE.SphereGeometry(0.27, 32, 20), mat); dot.position.set(0, -1.08, 0); g.add(dot);
-    g.position.y = -0.35;
-    return { g, mat };
-  }
-
   function mount(root){
     const track = root.querySelector('#xqtrack'), host = root.querySelector('#xqcanvas');
     if(!track || !host || !usable()) return null;
@@ -39,6 +26,13 @@ const XQ = (function(){
     const steps = [...track.querySelectorAll('.xq-step')], rail = [...track.querySelectorAll('.xq-rail button')];
     const ov = [1, 2, 3].map(i => track.querySelector('.xq-ov' + i));
     const typeEl = track.querySelector('.xq-type'), typeText = typeEl.dataset.text;
+    const o1el = ov[0], ui = o1el.querySelector('.xq-ui'), bar = o1el.querySelector('.xq-bar'), opts = [...o1el.querySelectorAll('.xq-opt')];
+    const qtyEl = o1el.querySelector('.xq-qty'), plusEl = o1el.querySelector('[data-b="plus"]'), c31 = o1el.querySelector('.xq-c31'), addB = o1el.querySelector('.xq-addb');
+    const cursor = o1el.querySelector('.xq-cursor'), rip = o1el.querySelector('.xq-rip'), badge = o1el.querySelector('.xq-badge'), badgeN = badge.querySelector('b');
+    // where the cursor goes, as [progress, target]; targets are elements (centre) or [x%, y%] of the stage
+    const PATH = [[0.03, [0.86, 0.92]], [0.085, bar], [0.17, bar, 0.32], [0.2, opts[2]], [0.232, opts[2]], [0.252, plusEl], [0.262, plusEl], [0.27, c31], [0.276, c31], [0.284, addB], [0.31, [0.9, 0.95]]];
+    const CLICKS = [0.09, 0.224, 0.24, 0.247, 0.255, 0.272, 0.287];
+    const ptOf = (t, dx) => { const R = o1el.getBoundingClientRect(); if(Array.isArray(t)) return [t[0] * R.width, t[1] * R.height]; const r = t.getBoundingClientRect(); return [r.left - R.left + r.width * (dx == null ? 0.5 : dx), r.top - R.top + r.height * 0.55]; };
     const listItems = [...track.querySelectorAll('.xq-list li')], foundEl = track.querySelector('[data-found]');
     const lblLen = track.querySelector('[data-dim="len"]'), lblDia = track.querySelector('[data-dim="dia"]');
 
@@ -54,16 +48,6 @@ const XQ = (function(){
     const rim = new THREE.DirectionalLight(0xffffff, 1.1); rim.position.set(-2, 3, -5); scene.add(rim);
     scene.add(new THREE.AmbientLight(0xffffff, 0.35));
     const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-
-    // ---- route 1: the idea
-    const idea = new THREE.Group(); scene.add(idea);
-    const qm = questionMark(); idea.add(qm.g);
-    const haloMat = new THREE.LineBasicMaterial({ color: 0x3b6cf0, transparent: true, opacity: 0.22, depthWrite: false });
-    const halo = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.25, 1)), haloMat); idea.add(halo);
-    const sparkMat = new THREE.PointsMaterial({ color: 0x2563eb, size: 0.07, transparent: true, opacity: 0.6, depthWrite: false });
-    const sp = new Float32Array(90 * 3); for(let i = 0; i < 90; i++){ const r = 2.6 + Math.random() * 0.9, a = Math.random() * Math.PI * 2, b = Math.acos(2 * Math.random() - 1); sp.set([r * Math.sin(b) * Math.cos(a), r * Math.cos(b), r * Math.sin(b) * Math.sin(a)], i * 3); }
-    const sparkGeo = new THREE.BufferGeometry(); sparkGeo.setAttribute('position', new THREE.BufferAttribute(sp, 3));
-    const sparks = new THREE.Points(sparkGeo, sparkMat); idea.add(sparks);
 
     // ---- route 2 + 3: the part (axis along Y, head on top)
     const part = new THREE.Group(); scene.add(part);
@@ -122,18 +106,6 @@ const XQ = (function(){
 
     function apply(time){
       const T = (time - t0) / 1000;
-      // ---------- route 1: idea (0 .. 0.36)
-      const inA = easeOut(seg(p, 0, 0.06)), outA = ease(seg(p, 0.28, 0.37));
-      const ideaV = inA * (1 - outA);
-      idea.visible = ideaV > 0.01;
-      idea.scale.setScalar((0.75 + 0.25 * inA) * (1 - 0.55 * outA));
-      idea.position.set(0.75, 0.25 + Math.sin(T * 1.3) * 0.08 + outA * 0.6, 0);
-      qm.g.rotation.y = Math.sin(T * 0.7) * 0.4 + Math.sin(p * 9) * 0.25;
-      halo.rotation.set(T * 0.08, -T * 0.12 - p * 2, 0);
-      sparks.rotation.y = T * 0.05 + p * 1.5;
-      qm.mat.opacity = ideaV; haloMat.opacity = 0.22 * ideaV; sparkMat.opacity = 0.55 * ideaV * (1 + outA * 1.5);
-      sparkMat.size = 0.07 + outA * 0.08;
-
       // ---------- route 2: sketch draws, dimensions, turns solid (0.33 .. 0.66)
       const draw = ease(seg(p, 0.34, 0.52));
       let budget = draw * total;
@@ -164,11 +136,33 @@ const XQ = (function(){
       fadeMats.forEach((m, i) => { m.opacity = clamp((i < 1 ? wIn : nIn) * 3, 0, 1); });
 
       // ---------- HTML overlays
-      const o1 = seg(p, 0.03, 0.08) * (1 - seg(p, 0.28, 0.33));
-      ov[0].style.opacity = o1; ov[0].style.transform = `translateY(${(1 - o1) * 16}px)`;
-      const typed = Math.round(typeText.length * seg(p, 0.07, 0.17));
-      typeEl.textContent = typeText.slice(0, typed);
-      ov[0].classList.toggle('s-res', p > 0.18); ov[0].classList.toggle('s-opt', p > 0.22); ov[0].classList.toggle('s-add', p > 0.26);
+      // route 1: search bar pops up, cursor clicks, types, picks, configures, adds
+      const pop = easeOut(seg(p, 0.012, 0.06)), out1 = ease(seg(p, 0.295, 0.335));
+      o1el.style.opacity = Math.min(1, pop * 1.4) * (1 - out1);
+      ui.style.transform = `translate(-50%, ${(1 - pop) * 26 - out1 * 34}px) scale(${0.94 + 0.06 * pop})`;
+      const focused = p > 0.092;
+      o1el.classList.toggle('s-focus', focused);
+      typeEl.textContent = typeText.slice(0, Math.round(typeText.length * seg(p, 0.1, 0.16)));
+      o1el.classList.toggle('s-typing', p > 0.1);
+      const ddOpen = p > 0.112 && p < 0.226;
+      o1el.classList.toggle('s-dd', ddOpen);
+      opts.forEach((o, i) => { o.classList.toggle('in', p > 0.118 + i * 0.011); o.classList.toggle('hov', i === 2 && p > 0.196 && p < 0.232); });
+      o1el.classList.toggle('s-pick', p > 0.226);
+      qtyEl.textContent = Math.max(1, Math.round(200 * ease(seg(p, 0.236, 0.258))));
+      c31.classList.toggle('on', p > 0.273);
+      const added = p > 0.288;
+      addB.classList.toggle('done', added);
+      badgeN.textContent = added ? 1 : 0; badge.classList.toggle('on', added);
+      // cursor
+      let k = 0; while(k < PATH.length - 2 && p > PATH[k + 1][0]) k++;
+      const A = PATH[k], B = PATH[k + 1], f = ease(seg(p, A[0], B[0]));
+      const pa = ptOf(A[1], A[2]), pb = ptOf(B[1], B[2]);
+      const cx = pa[0] + (pb[0] - pa[0]) * f, cy = pa[1] + (pb[1] - pa[1]) * f;
+      let press = 0; CLICKS.forEach(c => { press = Math.max(press, 1 - Math.abs(p - c) / 0.0045); });
+      press = Math.max(0, press);
+      cursor.style.opacity = seg(p, 0.03, 0.045) * (1 - seg(p, 0.3, 0.315));
+      cursor.style.transform = `translate(${cx}px, ${cy}px) scale(${1 - press * 0.16})`;
+      rip.style.opacity = press * 0.9; rip.style.transform = `scale(${0.4 + (1 - press) * 1.4})`;
 
       const o2 = seg(p, 0.4, 0.45) * (1 - seg(p, 0.63, 0.67));
       ov[1].style.opacity = o2;
