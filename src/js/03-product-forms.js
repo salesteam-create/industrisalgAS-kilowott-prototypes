@@ -157,8 +157,8 @@ function viewBasket(){
   const rows=S.basket.map((l,i)=>{const p=BY_SKU[l.sku]; return `<tr>
     <td><div class="pn">${thumb(p)}<div><a href="${productUrl(p)}"><b>${esc(p.label)}</b></a><div class="small muted">${p.sku} · ${stockHtml(p)}</div></div></div></td>
     <td data-fix="P3"><label class="sr" for="bc${i}">Sertifikat</label><select id="bc${i}" data-bcert="${i}" style="min-height:38px;width:auto"><option value="2.1" ${l.cert==='2.1'?'selected':''}>2.1</option><option value="3.1" ${l.cert==='3.1'?'selected':''}>3.1</option></select></td>
-    <td><label class="sr" for="bq${i}">Antall</label><input type="number" min="1" id="bq${i}" data-bqty="${i}" value="${l.qty}" style="width:110px;min-height:38px" data-fix="K2"></td>
-    ${S.loggedIn?`<td>${fmtNOK(p.price)}</td><td><b id="bs${i}">${fmtNOK(p.price*l.qty)}</b></td>`:''}
+    <td><label class="sr" for="bq${i}">Antall</label><input type="number" min="1" id="bq${i}" data-bqty="${i}" value="${l.qty}" class="b-qty" style="min-height:38px" data-fix="K2"></td>
+    ${S.loggedIn?`<td class="b-unit">${fmtNOK(p.price)}</td><td><b id="bs${i}">${fmtNOK(p.price*l.qty)}</b></td>`:''}
     <td><button type="button" class="linkbtn" data-act="rmline" data-i="${i}">Fjern</button></td></tr>`;}).join('');
   const sum=S.basket.reduce((a,l)=>a+BY_SKU[l.sku].price*l.qty,0);
   const anyOut=S.basket.some(l=>BY_SKU[l.sku].stock===0);
@@ -170,7 +170,7 @@ function viewBasket(){
     ${anyOut?`<p class="notice warnbox" data-fix="P1">En eller flere varer er bestillingsvarer. Vi bekrefter leveringstid i ${S.loggedIn?'ordrebekreftelsen':'tilbudet'}.</p>`:''}
     <div class="two" style="margin-top:20px">
       <div>
-        <div class="scrollx"><table class="btable"><thead><tr><th>Produkt</th><th>Sertifikat</th><th>Antall (stk)</th>${S.loggedIn?'<th>Pris/stk</th><th>Sum</th>':''}<th></th></tr></thead><tbody>${rows}</tbody></table></div>
+        <div class="scrollx"><table class="btable"><thead><tr><th>Produkt</th><th>Sertifikat</th><th>Antall (stk)</th>${S.loggedIn?'<th class="b-unit">Pris/stk</th><th>Sum</th>':''}<th></th></tr></thead><tbody>${rows}</tbody></table></div>
         <p style="margin-top:12px;display:flex;gap:16px;flex-wrap:wrap"><a href="#/hurtigordre">Legg til flere fra liste</a><button type="button" class="linkbtn" data-act="basket2list">Lagre som liste</button><button type="button" class="linkbtn" data-act="clearbasket">Tøm</button></p>
       </div>
       <div class="card">

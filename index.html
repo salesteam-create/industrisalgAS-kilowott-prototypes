@@ -1736,6 +1736,62 @@ body:not(.x-home) #main h3 { font-weight: 600; letter-spacing: -.01em; }
 @media (max-width: 1360px) and (min-width: 901px) { .catlayout { grid-template-columns: 220px minmax(0, 1fr); gap: 22px; } .ptable { font-size: .88rem; } .ptable td.name { min-width: 160px; } }
 #main .ptable td.name a, #main .btable td a { letter-spacing: 0; text-transform: none; }
 
+/* ===== Product table: adapts to the space it gets, no sideways scrolling ===== */
+#main .scrollx:has(> .ptable) { container-type: inline-size; overflow-x: visible; }
+.ptable .pmeta { display: none; }
+.ptable .pmeta span + span::before { content: "·"; margin: 0 6px; color: var(--c-line-2); }
+.ptable td .stk, .ptable td { white-space: nowrap; }
+.ptable td.name { white-space: normal; }
+@container (max-width: 1180px) {
+  .ptable .c-hide { display: none; }
+  .ptable .pmeta { display: block; font-size: .8rem; color: var(--c-ink-2); margin-top: 2px; }
+}
+@container (max-width: 900px) {
+  .ptable .c-key { display: none; }
+  .ptable td.name { min-width: 0; }
+  .ptable th, .ptable td { padding-left: 8px; padding-right: 8px; }
+}
+@container (max-width: 700px) {
+  .ptable thead { display: none; }
+  .ptable, .ptable tbody { display: block; }
+  .ptable tr { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "name name" "stock price" "qty add"; gap: 10px 12px; align-items: center; padding: 16px; border-bottom: 1px solid var(--c-line); }
+  .ptable tr:last-child { border-bottom: 0; }
+  .ptable td, .ptable tr:hover td { display: block; padding: 0; border: 0; background: none; }
+  .ptable td.name { grid-area: name; }
+  .ptable td.c-key, .ptable td.c-hide { display: none; }
+  .ptable td:has(.qty) { grid-area: qty; }
+  .ptable td:has([data-act="add"]) { grid-area: add; justify-self: end; }
+  .ptable td:has(> b) { grid-area: price; justify-self: end; text-align: right; }
+}
+
+/* basket table: fits its column */
+#main .scrollx:has(> .btable) { container-type: inline-size; }
+.btable .b-qty { width: 110px; }
+@container (max-width: 720px) {
+  .btable .b-unit { display: none; }
+  .btable .b-qty { width: 76px; }
+  .btable th, .btable td { padding: 12px 8px; }
+  .btable .pthumb { width: 44px; height: 34px; }
+}
+
+@container (max-width: 380px) {
+  .ptable tr { grid-template-columns: 1fr; grid-template-areas: "name" "stock" "price" "qty" "add"; padding: 14px 4px; }
+  .ptable td:has(> b), .ptable td:has([data-act="add"]) { justify-self: stretch; text-align: left; }
+  .ptable td:has([data-act="add"]) .btn { width: 100%; }
+}
+@container (max-width: 560px) {
+  .btable thead { display: none; }
+  .btable, .btable tbody { display: block; }
+  .btable tr { display: grid; grid-template-columns: auto auto 1fr auto; gap: 10px 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--c-line); }
+  .btable td { border: 0; padding: 0; }
+  .btable td:first-child { grid-column: 1 / -1; }
+  .btable td:last-child { justify-self: end; }
+}
+
+/* column lists of benefits (login page) wrap on small screens */
+.trust[style*="column"] li { white-space: normal; align-items: flex-start; }
+.trust[style*="column"] li svg { flex: none; margin-top: 3px; }
+
 </style>
 </head>
 <body>
@@ -2306,7 +2362,7 @@ function filterPanel(items,f){
 }
 function productRows(list){
   return list.map(p=>`<tr>
-    <td class="name"><div class="pn">${thumb(p)}<div><a href="${productUrl(p)}">${esc(p.label)}</a><div class="small muted">${p.sku}</div></div></div></td>
+    <td class="name"><div class="pn">${thumb(p)}<div><a href="${productUrl(p)}">${esc(p.label)}</a><div class="small muted">${p.sku}</div><div class="pmeta"><span>${pitchOf(p)}</span><span>${esc(matOf(p).name)}</span><span>${esc(p.grade)}</span></div></div></div></td>
     <td class="c-key" data-fix="K3"><b>M${p.d}</b></td>
     <td class="c-key">${p.L?p.L+' mm':'–'}</td>
     <td class="c-hide">${pitchOf(p)}</td>
@@ -2338,7 +2394,7 @@ function resultsBlock(items,f,ctx){
     </div>
   </div>
   ${chips.length?`<div class="chips" data-fix="D8">${chips.map(([k,v,l])=>`<button type="button" class="fchip" data-act="clrf" data-k="${k}" data-v="${esc(v)}" aria-label="Fjern filter ${esc(l)}">${esc(l)} ✕</button>`).join('')}</div>`:''}
-  ${filtered.length? `<div class="scrollx" data-fix="D3"><table class="ptable"><thead><tr><th>Produkt</th><th>Diameter</th><th>Lengde</th><th>Stigning</th><th>Materiale</th><th>Kvalitet</th><th>Lager</th>${S.loggedIn?'<th>Din pris</th>':''}<th>Antall (stk)</th><th></th></tr></thead><tbody>${productRows(pageItems)}</tbody></table></div>
+  ${filtered.length? `<div class="scrollx" data-fix="D3"><table class="ptable"><thead><tr><th>Produkt</th><th class="c-key">Diameter</th><th class="c-key">Lengde</th><th class="c-hide">Stigning</th><th class="c-hide">Materiale</th><th class="c-hide">Kvalitet</th><th>Lager</th>${S.loggedIn?'<th>Din pris</th>':''}<th>Antall (stk)</th><th></th></tr></thead><tbody>${productRows(pageItems)}</tbody></table></div>
     ${pages>1?`<nav class="pager" aria-label="Sider">${Array.from({length:pages},(_,i)=>`<button type="button" data-act="page" data-p="${i+1}" ${f.page===i+1?'aria-current="page"':''}>${i+1}</button>`).join('')}</nav>`:''}`
    : emptyState(ctx)}`;
 }
@@ -2553,8 +2609,8 @@ function viewBasket(){
   const rows=S.basket.map((l,i)=>{const p=BY_SKU[l.sku]; return `<tr>
     <td><div class="pn">${thumb(p)}<div><a href="${productUrl(p)}"><b>${esc(p.label)}</b></a><div class="small muted">${p.sku} · ${stockHtml(p)}</div></div></div></td>
     <td data-fix="P3"><label class="sr" for="bc${i}">Sertifikat</label><select id="bc${i}" data-bcert="${i}" style="min-height:38px;width:auto"><option value="2.1" ${l.cert==='2.1'?'selected':''}>2.1</option><option value="3.1" ${l.cert==='3.1'?'selected':''}>3.1</option></select></td>
-    <td><label class="sr" for="bq${i}">Antall</label><input type="number" min="1" id="bq${i}" data-bqty="${i}" value="${l.qty}" style="width:110px;min-height:38px" data-fix="K2"></td>
-    ${S.loggedIn?`<td>${fmtNOK(p.price)}</td><td><b id="bs${i}">${fmtNOK(p.price*l.qty)}</b></td>`:''}
+    <td><label class="sr" for="bq${i}">Antall</label><input type="number" min="1" id="bq${i}" data-bqty="${i}" value="${l.qty}" class="b-qty" style="min-height:38px" data-fix="K2"></td>
+    ${S.loggedIn?`<td class="b-unit">${fmtNOK(p.price)}</td><td><b id="bs${i}">${fmtNOK(p.price*l.qty)}</b></td>`:''}
     <td><button type="button" class="linkbtn" data-act="rmline" data-i="${i}">Fjern</button></td></tr>`;}).join('');
   const sum=S.basket.reduce((a,l)=>a+BY_SKU[l.sku].price*l.qty,0);
   const anyOut=S.basket.some(l=>BY_SKU[l.sku].stock===0);
@@ -2566,7 +2622,7 @@ function viewBasket(){
     ${anyOut?`<p class="notice warnbox" data-fix="P1">En eller flere varer er bestillingsvarer. Vi bekrefter leveringstid i ${S.loggedIn?'ordrebekreftelsen':'tilbudet'}.</p>`:''}
     <div class="two" style="margin-top:20px">
       <div>
-        <div class="scrollx"><table class="btable"><thead><tr><th>Produkt</th><th>Sertifikat</th><th>Antall (stk)</th>${S.loggedIn?'<th>Pris/stk</th><th>Sum</th>':''}<th></th></tr></thead><tbody>${rows}</tbody></table></div>
+        <div class="scrollx"><table class="btable"><thead><tr><th>Produkt</th><th>Sertifikat</th><th>Antall (stk)</th>${S.loggedIn?'<th class="b-unit">Pris/stk</th><th>Sum</th>':''}<th></th></tr></thead><tbody>${rows}</tbody></table></div>
         <p style="margin-top:12px;display:flex;gap:16px;flex-wrap:wrap"><a href="#/hurtigordre">Legg til flere fra liste</a><button type="button" class="linkbtn" data-act="basket2list">Lagre som liste</button><button type="button" class="linkbtn" data-act="clearbasket">Tøm</button></p>
       </div>
       <div class="card">
@@ -2742,7 +2798,7 @@ function viewIndustry(slug){
   const t=TESTIMONIALS[hash(slug)%3];
   return `<div data-fix="H5"><section class="hero"><div class="wrap" style="padding-bottom:48px"><div class="small" style="color:#b9c8da"><a href="#/" style="color:#b9c8da">Hjem</a> / Bransjeløsninger</div><h1>Festemateriell for ${esc(i.name.toLowerCase())}</h1><p class="lead">${esc(i.intro)}</p><div class="actions" style="margin-bottom:0"><a class="btn btn-primary" href="#f_special" data-act="scrollto" data-target="#indform">Be om tilbud</a><a class="btn btn-light" href="#/hurtigordre">Hurtigordre</a></div></div></section>
   <section class="section"><div class="wrap two"><div><h2>Ofte brukt i ${esc(i.name.toLowerCase())}</h2><p class="muted">Utvalg i ${esc(MATERIALS[i.mat].name.toLowerCase())}. Alle dimensjoner finnes under hver standard.</p>
-    <div class="scrollx"><table class="ptable"><thead><tr><th>Produkt</th><th>Diameter</th><th>Lengde</th><th>Stigning</th><th>Materiale</th><th>Kvalitet</th><th>Lager</th>${S.loggedIn?'<th>Din pris</th>':''}<th>Antall</th><th></th></tr></thead><tbody>${productRows(picks)}</tbody></table></div>
+    <div class="scrollx"><table class="ptable"><thead><tr><th>Produkt</th><th class="c-key">Diameter</th><th class="c-key">Lengde</th><th class="c-hide">Stigning</th><th class="c-hide">Materiale</th><th class="c-hide">Kvalitet</th><th>Lager</th>${S.loggedIn?'<th>Din pris</th>':''}<th>Antall</th><th></th></tr></thead><tbody>${productRows(picks)}</tbody></table></div>
     <p style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">${i.stds.map(k=>`<a href="#/kategori/${STANDARDS[k].slug}">Alle ${STANDARDS[k].din}</a>`).join('')}</p></div>
     <div><div class="card"><h3>Dokumentasjon og krav</h3><p>${esc(i.focus)}.</p><p class="small muted">2.1-sertifikat følger hver ordre. 3.1 på det meste av lageret. ISO 9001:2015 og Magnet JQS.</p></div><div style="margin-top:16px">${testimonialCard(t)}</div></div></div></section>
   <section class="section alt" id="indform"><div class="wrap two"><div><h2>Fortell oss hva prosjektet trenger</h2><p>Send liste, tegning eller spesifikasjon. Vi svarer innen 20 minutter i åpningstiden.</p></div><div class="card">${enquiryForm('special')}</div></div></section></div>`;

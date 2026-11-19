@@ -154,3 +154,59 @@ body:not(.x-home) #main h3 { font-weight: 600; letter-spacing: -.01em; }
 .ptable .qty button { width: 32px; }
 @media (max-width: 1360px) and (min-width: 901px) { .catlayout { grid-template-columns: 220px minmax(0, 1fr); gap: 22px; } .ptable { font-size: .88rem; } .ptable td.name { min-width: 160px; } }
 #main .ptable td.name a, #main .btable td a { letter-spacing: 0; text-transform: none; }
+
+/* ===== Product table: adapts to the space it gets, no sideways scrolling ===== */
+#main .scrollx:has(> .ptable) { container-type: inline-size; overflow-x: visible; }
+.ptable .pmeta { display: none; }
+.ptable .pmeta span + span::before { content: "·"; margin: 0 6px; color: var(--c-line-2); }
+.ptable td .stk, .ptable td { white-space: nowrap; }
+.ptable td.name { white-space: normal; }
+@container (max-width: 1180px) {
+  .ptable .c-hide { display: none; }
+  .ptable .pmeta { display: block; font-size: .8rem; color: var(--c-ink-2); margin-top: 2px; }
+}
+@container (max-width: 900px) {
+  .ptable .c-key { display: none; }
+  .ptable td.name { min-width: 0; }
+  .ptable th, .ptable td { padding-left: 8px; padding-right: 8px; }
+}
+@container (max-width: 700px) {
+  .ptable thead { display: none; }
+  .ptable, .ptable tbody { display: block; }
+  .ptable tr { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "name name" "stock price" "qty add"; gap: 10px 12px; align-items: center; padding: 16px; border-bottom: 1px solid var(--c-line); }
+  .ptable tr:last-child { border-bottom: 0; }
+  .ptable td, .ptable tr:hover td { display: block; padding: 0; border: 0; background: none; }
+  .ptable td.name { grid-area: name; }
+  .ptable td.c-key, .ptable td.c-hide { display: none; }
+  .ptable td:has(.qty) { grid-area: qty; }
+  .ptable td:has([data-act="add"]) { grid-area: add; justify-self: end; }
+  .ptable td:has(> b) { grid-area: price; justify-self: end; text-align: right; }
+}
+
+/* basket table: fits its column */
+#main .scrollx:has(> .btable) { container-type: inline-size; }
+.btable .b-qty { width: 110px; }
+@container (max-width: 720px) {
+  .btable .b-unit { display: none; }
+  .btable .b-qty { width: 76px; }
+  .btable th, .btable td { padding: 12px 8px; }
+  .btable .pthumb { width: 44px; height: 34px; }
+}
+
+@container (max-width: 380px) {
+  .ptable tr { grid-template-columns: 1fr; grid-template-areas: "name" "stock" "price" "qty" "add"; padding: 14px 4px; }
+  .ptable td:has(> b), .ptable td:has([data-act="add"]) { justify-self: stretch; text-align: left; }
+  .ptable td:has([data-act="add"]) .btn { width: 100%; }
+}
+@container (max-width: 560px) {
+  .btable thead { display: none; }
+  .btable, .btable tbody { display: block; }
+  .btable tr { display: grid; grid-template-columns: auto auto 1fr auto; gap: 10px 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--c-line); }
+  .btable td { border: 0; padding: 0; }
+  .btable td:first-child { grid-column: 1 / -1; }
+  .btable td:last-child { justify-self: end; }
+}
+
+/* column lists of benefits (login page) wrap on small screens */
+.trust[style*="column"] li { white-space: normal; align-items: flex-start; }
+.trust[style*="column"] li svg { flex: none; margin-top: 3px; }

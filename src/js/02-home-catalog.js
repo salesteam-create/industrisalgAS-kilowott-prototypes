@@ -175,7 +175,7 @@ function filterPanel(items,f){
 }
 function productRows(list){
   return list.map(p=>`<tr>
-    <td class="name"><div class="pn">${thumb(p)}<div><a href="${productUrl(p)}">${esc(p.label)}</a><div class="small muted">${p.sku}</div></div></div></td>
+    <td class="name"><div class="pn">${thumb(p)}<div><a href="${productUrl(p)}">${esc(p.label)}</a><div class="small muted">${p.sku}</div><div class="pmeta"><span>${pitchOf(p)}</span><span>${esc(matOf(p).name)}</span><span>${esc(p.grade)}</span></div></div></div></td>
     <td class="c-key" data-fix="K3"><b>M${p.d}</b></td>
     <td class="c-key">${p.L?p.L+' mm':'–'}</td>
     <td class="c-hide">${pitchOf(p)}</td>
@@ -207,7 +207,7 @@ function resultsBlock(items,f,ctx){
     </div>
   </div>
   ${chips.length?`<div class="chips" data-fix="D8">${chips.map(([k,v,l])=>`<button type="button" class="fchip" data-act="clrf" data-k="${k}" data-v="${esc(v)}" aria-label="Fjern filter ${esc(l)}">${esc(l)} ✕</button>`).join('')}</div>`:''}
-  ${filtered.length? `<div class="scrollx" data-fix="D3"><table class="ptable"><thead><tr><th>Produkt</th><th>Diameter</th><th>Lengde</th><th>Stigning</th><th>Materiale</th><th>Kvalitet</th><th>Lager</th>${S.loggedIn?'<th>Din pris</th>':''}<th>Antall (stk)</th><th></th></tr></thead><tbody>${productRows(pageItems)}</tbody></table></div>
+  ${filtered.length? `<div class="scrollx" data-fix="D3"><table class="ptable"><thead><tr><th>Produkt</th><th class="c-key">Diameter</th><th class="c-key">Lengde</th><th class="c-hide">Stigning</th><th class="c-hide">Materiale</th><th class="c-hide">Kvalitet</th><th>Lager</th>${S.loggedIn?'<th>Din pris</th>':''}<th>Antall (stk)</th><th></th></tr></thead><tbody>${productRows(pageItems)}</tbody></table></div>
     ${pages>1?`<nav class="pager" aria-label="Sider">${Array.from({length:pages},(_,i)=>`<button type="button" data-act="page" data-p="${i+1}" ${f.page===i+1?'aria-current="page"':''}>${i+1}</button>`).join('')}</nav>`:''}`
    : emptyState(ctx)}`;
 }
