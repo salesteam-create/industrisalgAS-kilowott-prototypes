@@ -12,7 +12,7 @@ SCRIPTS = [
     "../vendor/three.min.js",  # three.js r158 (MIT), bundled so 3D works offline
     "00-data.js", "01-core.js", "02-home-catalog.js", "03-product-forms.js",
     "04-quick-account.js", "05-i18n.js", "06-catnav.js", "07-minicart.js",
-    "070-x3d.js",            # procedural 3D fasteners
+    "070-x3d.js","074-ind-photos.js",            # procedural 3D fasteners
     "075-concept-home.js",   # new homepage (replaces viewHome before first render)
     "08-router.js",
     "99-concept-post.js",    # render wrapper, effects, design notes

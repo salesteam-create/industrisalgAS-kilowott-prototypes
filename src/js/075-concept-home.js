@@ -98,7 +98,7 @@ function viewHome(){
   const inds=INDUSTRIES.map((x,i)=>`<li><a class="xh-ind-row ${i===0?'on':''}" href="#/bransje/${x.slug}" data-ind="${i}"><i>${String(i+1).padStart(2,'0')}</i><span><strong>${esc(x.name)}</strong><small>${esc(x.intro)}</small></span>${XI.arrS}</a></li>`).join('');
   const indCards=INDUSTRIES.map((x,i)=>{ const s0=STANDARDS[x.stds[0]];
     return `<div class="xh-ind-card" data-indc="${i}" ${i?'hidden':''}>
-      <div class="xh-ind-art" aria-hidden="true">${drawing(s0.kind,x.stds[0],true)}</div>
+      ${IND_PHOTO[x.slug]?`<figure class="xh-ind-photo"><img src="${IND_PHOTO[x.slug]}" alt="${esc(x.name)}" loading="lazy" decoding="async" width="480" height="360"></figure>`:`<div class="xh-ind-art" aria-hidden="true">${drawing(s0.kind,x.stds[0],true)}</div>`}
       <p class="x-eyebrow">Bransje ${String(i+1).padStart(2,'0')} / ${INDUSTRIES.length}</p>
       <h3>${esc(x.name)}</h3><p>${esc(x.intro)}</p>
       <dl class="xh-ind-spec"><dt>Fokus</dt><dd>${esc(x.focus)}</dd><dt>Materiale</dt><dd>${esc(MATERIALS[x.mat].name)}</dd><dt>Mest brukt</dt><dd><span class="xh-ind-chips">${x.stds.map(k=>`<a href="#/kategori/${STANDARDS[k].slug}">${esc(STANDARDS[k].din)}</a>`).join('')}</span></dd></dl>

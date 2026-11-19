@@ -414,6 +414,14 @@ a:hover .x-arrow-c { background: var(--c-blue); color: #fff; }
 @keyframes xcard { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .xh-ind-art { position: absolute; right: 0; top: 0; width: 140px; color: #c9d4ea; pointer-events: none; }
 .xh-ind-art svg { width: 100%; height: auto; }
+.xh-ind-photo { position: absolute; right: 0; top: 0; width: clamp(150px, 30%, 220px); aspect-ratio: 4 / 3; margin: 0; border-radius: 16px; overflow: hidden; background: var(--c-soft); box-shadow: 0 1px 2px rgba(15,23,42,.06), 0 8px 24px -10px rgba(15,23,42,.25); }
+.xh-ind-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.04); animation: xindimg .9s var(--ease) forwards; }
+@keyframes xindimg { to { transform: scale(1); } }
+.xh-ind-card:has(.xh-ind-photo) > .x-eyebrow, .xh-ind-card:has(.xh-ind-photo) > h3, .xh-ind-card:has(.xh-ind-photo) > p { padding-right: calc(clamp(150px, 30%, 220px) + 24px); }
+@media (max-width: 640px) {
+  .xh-ind-photo { position: static; width: 100%; aspect-ratio: 16 / 9; margin-bottom: 20px; }
+  .xh-ind-card:has(.xh-ind-photo) > .x-eyebrow, .xh-ind-card:has(.xh-ind-photo) > h3, .xh-ind-card:has(.xh-ind-photo) > p { padding-right: 0; }
+}
 .xh-ind-card h3 { font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.1; font-weight: 600; letter-spacing: -.03em; margin: 14px 0 12px; max-width: 16ch; }
 .xh-ind-card > p { color: var(--c-ink-2); font-size: 1.08rem; max-width: 42ch; }
 .xh-ind-spec { display: grid; grid-template-columns: auto 1fr; gap: 12px 24px; margin: 28px 0 32px; padding: 22px 0; border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); font-size: .96rem; }
