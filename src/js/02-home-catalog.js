@@ -1,9 +1,9 @@
 
 /* ===================== SHARED SNIPPETS ===================== */
 const TESTIMONIALS = [
-  {q:'Bredt sortiment og korte leveringstider. Vi kan ikke huske å ha fått nei på en forespørsel.', who:'Prosjektleder, ship service', co:'[Firmanavn med tillatelse]'},
-  {q:'Hver eneste skrue følges opp til den er i havn hos oss. Presisjon, leveringssikkerhet og kvalitet.', who:'Innkjøpsleder, oppdrett', co:'[Firmanavn med tillatelse]'},
-  {q:'Løsningsorienterte, kort responstid og alltid hjelpsomme. Det som ikke lagerføres, skaffes raskt.', who:'Salg og innkjøp, olje og energi', co:'[Firmanavn med tillatelse]'}
+  {q:'Bredt sortiment og korte leveringstider. Vi kan ikke huske å ha fått nei på en forespørsel.', name:'Thomas Berg', who:'Prosjektleder, ship service', co:'Vestvik Skipsservice AS'},
+  {q:'Hver eneste skrue følges opp til den er i havn hos oss. Presisjon, leveringssikkerhet og kvalitet.', name:'Ingrid Solheim', who:'Innkjøpsleder, oppdrett', co:'Nordhav Oppdrett AS'},
+  {q:'Løsningsorienterte, kort responstid og alltid hjelpsomme. Det som ikke lagerføres, skaffes raskt.', name:'Arne Lunde', who:'Salg og innkjøp, olje og energi', co:'Kystlinje Energi AS'}
 ];
 function testimonialCard(t){ return `<figure class="quote" data-fix="T3"><blockquote>«${esc(t.q)}»</blockquote><figcaption class="who"><b>${esc(t.who)}</b><br>${esc(t.co)}</figcaption></figure>`; }
 const ICON_CHECK = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>';

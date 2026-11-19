@@ -506,6 +506,12 @@ a:hover .x-arrow-c { background: var(--c-blue); color: #fff; }
 .xh-tm:first-child figcaption { color: #b9c4dd; border-top-color: rgba(255, 255, 255, .16); }
 .xh-tm figcaption b { color: var(--c-ink); font-weight: 600; display: block; }
 .xh-tm:first-child figcaption b { color: #fff; }
+.xh-tm figcaption { display: flex; align-items: center; gap: 14px; line-height: 1.4; }
+.xh-tm-face { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 3px #fff, 0 0 0 4px var(--c-line); }
+.xh-tm:first-child .xh-tm-face { box-shadow: 0 0 0 3px var(--c-navy), 0 0 0 4px rgba(255,255,255,.35); }
+.xh-tm-role, .xh-tm-co { display: block; }
+.xh-tm-co { color: var(--c-ink-2); font-weight: 500; }
+.xh-tm:first-child .xh-tm-co { color: #dbe4f7; }
 
 /* FAQ + contact */
 .xh-fc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); align-items: start; }

@@ -290,7 +290,7 @@ function viewHome(){
   <section class="x-sec x-soft">
     <div class="x-wrap">
       <div class="x-head" data-rv><div><p class="x-eyebrow">Kundene våre</p><h2 class="x-h2">«Vi kan ikke huske å ha fått nei.»</h2></div></div>
-      <div class="xh-tms">${TESTIMONIALS.map((t,i)=>`<figure class="xh-tm" data-rv style="--rv:${i}"><div><span class="qm" aria-hidden="true">“</span><blockquote>${esc(t.q)}</blockquote></div><figcaption><b>${esc(t.who)}</b>${esc(t.co)}</figcaption></figure>`).join('')}</div>
+      <div class="xh-tms">${TESTIMONIALS.map((t,i)=>`<figure class="xh-tm" data-rv style="--rv:${i}"><div><span class="qm" aria-hidden="true">“</span><blockquote>${esc(t.q)}</blockquote></div><figcaption>${TM_FACE[i]?`<img class="xh-tm-face" src="${TM_FACE[i]}" alt="" width="52" height="52">`:''}<span><b>${esc(t.name||t.who)}</b><span class="xh-tm-role">${esc(t.who)}</span><span class="xh-tm-co">${esc(t.co)}</span></span></figcaption></figure>`).join('')}</div>
     </div>
   </section>
 
