@@ -1646,7 +1646,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--c
 .xq-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 0; }
 .xq-chips span { font-size: .86rem; font-weight: 500; padding: 7px 12px; border-radius: 999px; background: var(--c-blue-soft); color: var(--c-blue); }
 /* route 01: search starts as an icon */
-.xq-bar { margin: 0 auto; overflow: hidden; gap: 0; }
+.xq-bar { margin: 0 auto; overflow: hidden; gap: 0; transform-origin: 50% 50%; will-change: transform; }
 .xq-bar > svg { flex: none; color: var(--c-ink-2); }
 .xq-bar .xq-field { margin-left: 12px; }
 .xq-bar .xq-field, .xq-bar kbd { opacity: var(--fx, 0); white-space: nowrap; }
@@ -4048,8 +4048,8 @@ const XQ = (function(){
     const addB = o1el.querySelector('.xq-addb');
     const cursor = o1el.querySelector('.xq-cursor'), rip = o1el.querySelector('.xq-rip'), badge = o1el.querySelector('.xq-badge'), badgeN = badge.querySelector('b');
     // where the cursor goes, as [progress, target]; targets are elements (centre) or [x%, y%] of the stage
-    const PATH = [[0.07, [0.86, 0.92]], [0.1, bar], [0.165, bar, 0.3], [0.205, opts[1]], [0.235, opts[1]], [0.262, addB], [0.31, [0.9, 0.95]]];
-    const CLICKS = [0.104, 0.226, 0.266];
+    const PATH = [[0.095, [0.86, 0.92]], [0.12, bar], [0.17, bar, 0.3], [0.205, opts[1]], [0.235, opts[1]], [0.262, addB], [0.31, [0.9, 0.95]]];
+    const CLICKS = [0.124, 0.226, 0.266];
     const ptOf = (t, dx) => { const R = o1el.getBoundingClientRect(); if(Array.isArray(t)) return [t[0] * R.width, t[1] * R.height]; const r = t.getBoundingClientRect(); return [r.left - R.left + r.width * (dx == null ? 0.5 : dx), r.top - R.top + r.height * 0.55]; };
     const listItems = [...track.querySelectorAll('.xq-list li')], foundEl = track.querySelector('[data-found]');
     const lblLen = track.querySelector('[data-dim="len"]'), lblDia = track.querySelector('[data-dim="dia"]');
@@ -4157,7 +4157,10 @@ const XQ = (function(){
       // route 1: search bar pops up, cursor clicks, types, picks, configures, adds
       const pop = easeOut(seg(p, 0.005, 0.035)), out1 = ease(seg(p, 0.295, 0.335));
       // search starts as a round icon, then grows into the full bar
-      const ex = ease(seg(p, 0.04, 0.085)), W = ui.clientWidth || 520;
+      const mv = ease(seg(p, 0.035, 0.068)), ex = ease(seg(p, 0.07, 0.1)), W = ui.clientWidth || 520;
+      // starts big in the centre of the stage, rises to the top, then expands
+      const dy = (o1el.clientHeight / 2) - (ui.offsetTop + 30);
+      bar.style.transform = `translateY(${dy * (1 - mv)}px) scale(${1.7 - 0.7 * mv})`;
       bar.style.width = (60 + (W - 60) * ex) + 'px';
       bar.style.paddingLeft = (21 - 3 * ex) + 'px';
       bar.style.borderRadius = (30 - 14 * ex) + 'px';
@@ -4165,13 +4168,13 @@ const XQ = (function(){
       o1el.classList.toggle('s-icon', ex < 0.02);
       o1el.style.opacity = Math.min(1, pop * 1.4) * (1 - out1);
       ui.style.transform = `translate(-50%, ${(1 - pop) * 26 - out1 * 34}px) scale(${0.94 + 0.06 * pop})`;
-      const focused = p > 0.104;
+      const focused = p > 0.124;
       o1el.classList.toggle('s-focus', focused);
-      typeEl.textContent = typeText.slice(0, Math.round(typeText.length * seg(p, 0.11, 0.165)));
-      o1el.classList.toggle('s-typing', p > 0.11);
-      const ddOpen = p > 0.125 && p < 0.228;
+      typeEl.textContent = typeText.slice(0, Math.round(typeText.length * seg(p, 0.128, 0.17)));
+      o1el.classList.toggle('s-typing', p > 0.128);
+      const ddOpen = p > 0.135 && p < 0.228;
       o1el.classList.toggle('s-dd', ddOpen);
-      opts.forEach((o, i) => { o.classList.toggle('in', p > 0.132 + i * 0.016); o.classList.toggle('hov', i === 1 && p > 0.198 && p < 0.232); });
+      opts.forEach((o, i) => { o.classList.toggle('in', p > 0.142 + i * 0.016); o.classList.toggle('hov', i === 1 && p > 0.198 && p < 0.232); });
       o1el.classList.toggle('s-pick', p > 0.228);
       const added = p > 0.268;
       addB.classList.toggle('done', added);
@@ -4183,7 +4186,7 @@ const XQ = (function(){
       const cx = pa[0] + (pb[0] - pa[0]) * f, cy = pa[1] + (pb[1] - pa[1]) * f;
       let press = 0; CLICKS.forEach(c => { press = Math.max(press, 1 - Math.abs(p - c) / 0.0045); });
       press = Math.max(0, press);
-      cursor.style.opacity = seg(p, 0.07, 0.085) * (1 - seg(p, 0.3, 0.315));
+      cursor.style.opacity = seg(p, 0.095, 0.11) * (1 - seg(p, 0.3, 0.315));
       cursor.style.transform = `translate(${cx}px, ${cy}px) scale(${1 - press * 0.16})`;
       rip.style.opacity = press * 0.9; rip.style.transform = `scale(${0.4 + (1 - press) * 1.4})`;
 
