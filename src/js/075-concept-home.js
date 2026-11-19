@@ -78,7 +78,7 @@ function viewHome(){
 
   const cats=CATEGORIES.map((c,i)=>{ const n=xCatCount(c.slug); const src=XM.cats[c.slug];
     return `<a class="xh-cat" href="#/kategori/${c.slug}" data-rv style="--rv:${i%4}">
-      <span class="xh-cat-img">${CAT_EMBED[c.slug]?`<img src="${CAT_EMBED[c.slug]}" alt="${esc(c.name)}" loading="lazy">`:src?xImg(XMEDIA+src,c.name):''}${catIcon(c)}</span>
+      <span class="xh-cat-img">${CAT_EMBED[c.slug]?`<img class="xh-cat-emb" src="${CAT_EMBED[c.slug]}" alt="${esc(c.name)}" loading="lazy">`:src?xImg(XMEDIA+src,c.name):''}${catIcon(c)}</span>
       <span class="xh-cat-meta"><span><strong>${esc(c.name)}</strong>${n?`<small>${fmtInt(n)} artikler</small>`:''}</span><span class="x-arrow-c">${XI.arrS}</span></span></a>`; }).join('');
 
   const qo=parseOrderLines(QO_EXAMPLE);

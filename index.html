@@ -1240,6 +1240,7 @@ body.x-home { background: #fff; }
 .xh-cat-img { aspect-ratio: 4 / 3; background: var(--c-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .xh-cat-img img { width: 78%; height: 78%; object-fit: contain; mix-blend-mode: multiply; transition: transform .6s var(--ease); }
 .xh-cat:hover .xh-cat-img img { transform: scale(1.06); }
+.xh-cat-img img.xh-cat-emb { width: 60%; height: 60%; }
 .xh-cat-img .ph { width: 78%; height: 78%; background-color: transparent; mix-blend-mode: multiply; }
 .xh-cat-img > svg { width: 60%; height: auto; color: var(--c-navy); }
 .xh-cat-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 20px 22px 22px; }
@@ -3450,7 +3451,7 @@ function viewHome(){
 
   const cats=CATEGORIES.map((c,i)=>{ const n=xCatCount(c.slug); const src=XM.cats[c.slug];
     return `<a class="xh-cat" href="#/kategori/${c.slug}" data-rv style="--rv:${i%4}">
-      <span class="xh-cat-img">${CAT_EMBED[c.slug]?`<img src="${CAT_EMBED[c.slug]}" alt="${esc(c.name)}" loading="lazy">`:src?xImg(XMEDIA+src,c.name):''}${catIcon(c)}</span>
+      <span class="xh-cat-img">${CAT_EMBED[c.slug]?`<img class="xh-cat-emb" src="${CAT_EMBED[c.slug]}" alt="${esc(c.name)}" loading="lazy">`:src?xImg(XMEDIA+src,c.name):''}${catIcon(c)}</span>
       <span class="xh-cat-meta"><span><strong>${esc(c.name)}</strong>${n?`<small>${fmtInt(n)} artikler</small>`:''}</span><span class="x-arrow-c">${XI.arrS}</span></span></a>`; }).join('');
 
   const qo=parseOrderLines(QO_EXAMPLE);

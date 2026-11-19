@@ -342,6 +342,7 @@ body.x-home { background: #fff; }
 .xh-cat-img { aspect-ratio: 4 / 3; background: var(--c-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .xh-cat-img img { width: 78%; height: 78%; object-fit: contain; mix-blend-mode: multiply; transition: transform .6s var(--ease); }
 .xh-cat:hover .xh-cat-img img { transform: scale(1.06); }
+.xh-cat-img img.xh-cat-emb { width: 60%; height: 60%; }
 .xh-cat-img .ph { width: 78%; height: 78%; background-color: transparent; mix-blend-mode: multiply; }
 .xh-cat-img > svg { width: 60%; height: auto; color: var(--c-navy); }
 .xh-cat-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 20px 22px 22px; }
