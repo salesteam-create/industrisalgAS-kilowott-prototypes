@@ -747,3 +747,11 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--c
 
 .xq-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 0; }
 .xq-chips span { font-size: .86rem; font-weight: 500; padding: 7px 12px; border-radius: 999px; background: var(--c-blue-soft); color: var(--c-blue); }
+/* route 01: search starts as an icon */
+.xq-bar { margin: 0 auto; overflow: hidden; gap: 0; }
+.xq-bar > svg { flex: none; color: var(--c-ink-2); }
+.xq-bar .xq-field { margin-left: 12px; }
+.xq-bar .xq-field, .xq-bar kbd { opacity: var(--fx, 0); white-space: nowrap; }
+.s-icon .xq-bar { box-shadow: 0 0 0 0 rgba(29,78,216,.25), 0 18px 40px -18px rgba(15,23,42,.35); animation: xqpulse 2s var(--ease) infinite; }
+.s-icon .xq-bar > svg { color: var(--c-blue); }
+@keyframes xqpulse { 0% { box-shadow: 0 0 0 0 rgba(29,78,216,.28), 0 18px 40px -18px rgba(15,23,42,.35); } 70%, 100% { box-shadow: 0 0 0 14px rgba(29,78,216,0), 0 18px 40px -18px rgba(15,23,42,.35); } }

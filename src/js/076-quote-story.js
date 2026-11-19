@@ -30,8 +30,8 @@ const XQ = (function(){
     const addB = o1el.querySelector('.xq-addb');
     const cursor = o1el.querySelector('.xq-cursor'), rip = o1el.querySelector('.xq-rip'), badge = o1el.querySelector('.xq-badge'), badgeN = badge.querySelector('b');
     // where the cursor goes, as [progress, target]; targets are elements (centre) or [x%, y%] of the stage
-    const PATH = [[0.03, [0.86, 0.92]], [0.09, bar], [0.16, bar, 0.3], [0.205, opts[1]], [0.235, opts[1]], [0.262, addB], [0.31, [0.9, 0.95]]];
-    const CLICKS = [0.095, 0.226, 0.266];
+    const PATH = [[0.07, [0.86, 0.92]], [0.1, bar], [0.165, bar, 0.3], [0.205, opts[1]], [0.235, opts[1]], [0.262, addB], [0.31, [0.9, 0.95]]];
+    const CLICKS = [0.104, 0.226, 0.266];
     const ptOf = (t, dx) => { const R = o1el.getBoundingClientRect(); if(Array.isArray(t)) return [t[0] * R.width, t[1] * R.height]; const r = t.getBoundingClientRect(); return [r.left - R.left + r.width * (dx == null ? 0.5 : dx), r.top - R.top + r.height * 0.55]; };
     const listItems = [...track.querySelectorAll('.xq-list li')], foundEl = track.querySelector('[data-found]');
     const lblLen = track.querySelector('[data-dim="len"]'), lblDia = track.querySelector('[data-dim="dia"]');
@@ -137,16 +137,23 @@ const XQ = (function(){
 
       // ---------- HTML overlays
       // route 1: search bar pops up, cursor clicks, types, picks, configures, adds
-      const pop = easeOut(seg(p, 0.012, 0.06)), out1 = ease(seg(p, 0.295, 0.335));
+      const pop = easeOut(seg(p, 0.005, 0.035)), out1 = ease(seg(p, 0.295, 0.335));
+      // search starts as a round icon, then grows into the full bar
+      const ex = ease(seg(p, 0.04, 0.085)), W = ui.clientWidth || 520;
+      bar.style.width = (60 + (W - 60) * ex) + 'px';
+      bar.style.paddingLeft = (21 - 3 * ex) + 'px';
+      bar.style.borderRadius = (30 - 14 * ex) + 'px';
+      bar.style.setProperty('--fx', seg(ex, 0.55, 1).toFixed(3));
+      o1el.classList.toggle('s-icon', ex < 0.02);
       o1el.style.opacity = Math.min(1, pop * 1.4) * (1 - out1);
       ui.style.transform = `translate(-50%, ${(1 - pop) * 26 - out1 * 34}px) scale(${0.94 + 0.06 * pop})`;
-      const focused = p > 0.092;
+      const focused = p > 0.104;
       o1el.classList.toggle('s-focus', focused);
-      typeEl.textContent = typeText.slice(0, Math.round(typeText.length * seg(p, 0.1, 0.16)));
-      o1el.classList.toggle('s-typing', p > 0.1);
-      const ddOpen = p > 0.115 && p < 0.228;
+      typeEl.textContent = typeText.slice(0, Math.round(typeText.length * seg(p, 0.11, 0.165)));
+      o1el.classList.toggle('s-typing', p > 0.11);
+      const ddOpen = p > 0.125 && p < 0.228;
       o1el.classList.toggle('s-dd', ddOpen);
-      opts.forEach((o, i) => { o.classList.toggle('in', p > 0.122 + i * 0.016); o.classList.toggle('hov', i === 1 && p > 0.198 && p < 0.232); });
+      opts.forEach((o, i) => { o.classList.toggle('in', p > 0.132 + i * 0.016); o.classList.toggle('hov', i === 1 && p > 0.198 && p < 0.232); });
       o1el.classList.toggle('s-pick', p > 0.228);
       const added = p > 0.268;
       addB.classList.toggle('done', added);
@@ -158,7 +165,7 @@ const XQ = (function(){
       const cx = pa[0] + (pb[0] - pa[0]) * f, cy = pa[1] + (pb[1] - pa[1]) * f;
       let press = 0; CLICKS.forEach(c => { press = Math.max(press, 1 - Math.abs(p - c) / 0.0045); });
       press = Math.max(0, press);
-      cursor.style.opacity = seg(p, 0.03, 0.045) * (1 - seg(p, 0.3, 0.315));
+      cursor.style.opacity = seg(p, 0.07, 0.085) * (1 - seg(p, 0.3, 0.315));
       cursor.style.transform = `translate(${cx}px, ${cy}px) scale(${1 - press * 0.16})`;
       rip.style.opacity = press * 0.9; rip.style.transform = `scale(${0.4 + (1 - press) * 1.4})`;
 
