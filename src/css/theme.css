@@ -771,3 +771,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--c
 .xq-badge.on b { background: var(--c-accent); }
 .xq-ov3 .xq-lf b, .xq-rail button.on span { color: var(--c-accent); }
 .xh-route.prime .x-link svg, .x-link:hover svg { color: var(--c-accent); }
+
+/* secondary calls to action: brand blue (or outline via .x-btn-line) */
+.x-btn-sec, .btn-brand { background: var(--c-blue); color: #fff; }
+.x-btn-sec:hover, .btn-brand:hover { background: var(--c-blue-2); color: #fff; filter: none; transform: translateY(-1px); box-shadow: 0 14px 30px -14px rgba(29, 78, 216, .6); }

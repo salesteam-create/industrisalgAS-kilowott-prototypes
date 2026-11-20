@@ -93,7 +93,7 @@ function viewHome(){
   const last=ORDERS[0];
   const welcome = lg ? `<div class="xh-welcome" data-note="N9"><h3>Velkommen tilbake, Eksempel Verksted AS</h3><p class="muted" style="margin:0;font-size:.9rem">Siste ordre ${esc(last.id)} · ${esc(last.date)} · ${esc(last.ref)}</p>
       <ul>${last.lines.map(([p,q])=>`<li>${fmtInt(q)} × ${esc(p.label)}</li>`).join('')}</ul>
-      <button type="button" class="x-btn x-btn-blue x-btn-sm" data-act="reorder" data-id="${last.id}">Bestill på nytt ${XI.arrS}</button></div>` : '';
+      <button type="button" class="x-btn x-btn-sec x-btn-sm" data-act="reorder" data-id="${last.id}">Bestill på nytt ${XI.arrS}</button></div>` : '';
 
   const inds=INDUSTRIES.map((x,i)=>`<li><a class="xh-ind-row ${i===0?'on':''}" href="#/bransje/${x.slug}" data-ind="${i}"><i>${String(i+1).padStart(2,'0')}</i><span><strong>${esc(x.name)}</strong><small>${esc(x.intro)}</small></span>${XI.arrS}</a></li>`).join('');
   const indCards=INDUSTRIES.map((x,i)=>{ const s0=STANDARDS[x.stds[0]];
@@ -133,7 +133,7 @@ function viewHome(){
           <label for="hq" class="sr">Søk etter produkt, standard eller artikkelnummer</label>
           <input id="hq" type="text" autocomplete="off" spellcheck="false" placeholder="Søk etter DIN, mål, materiale eller artikkelnr." aria-autocomplete="list" aria-controls="hsug" aria-expanded="false">
           <kbd aria-hidden="true">/</kbd>
-          <button type="button" class="x-btn x-btn-blue" data-act="herosearch">${XI.search}<span>Søk</span></button>
+          <button type="button" class="x-btn x-btn-sec" data-act="herosearch">${XI.search}<span>Søk</span></button>
         </div>
         <div class="xh-sug" id="hsug" hidden></div>
       </div>
