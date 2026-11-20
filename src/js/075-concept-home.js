@@ -141,7 +141,7 @@ function viewHome(){
         ${['DIN 933 A4 M10','DIN 912 M8','DIN 985 M12','Nord-Lock M16'].map(q=>`<a href="#/sok?q=${encodeURIComponent(q)}">${esc(q)}</a>`).join('')}
       </div>
       <div class="xh-ctas" data-note="N10">
-        <a class="x-btn x-btn-white" href="#/kurv">Be om tilbud ${XI.arr}</a>
+        <a class="x-btn x-btn-blue" href="#/kurv">Be om tilbud ${XI.arr}</a>
         <a class="x-btn x-btn-glass" href="#/hurtigordre">Last opp innkjøpsliste</a>
       </div>
     </div>

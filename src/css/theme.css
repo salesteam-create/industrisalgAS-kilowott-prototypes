@@ -16,6 +16,9 @@
   --c-blue: #1d4ed8;
   --c-blue-2: #1740b5;
   --c-blue-soft: #eaf0ff;
+  --c-accent: #E55B0F;
+  --c-accent-2: #C94C08;
+  --c-accent-soft: #FDEEE5;
   --c-navy: #0b1f4d;
   --c-navy-2: #081739;
   --c-or: #e8660d;
@@ -755,3 +758,16 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--c
 .s-icon .xq-bar { box-shadow: 0 0 0 0 rgba(29,78,216,.25), 0 18px 40px -18px rgba(15,23,42,.35); animation: xqpulse 2s var(--ease) infinite; }
 .s-icon .xq-bar > svg { color: var(--c-blue); }
 @keyframes xqpulse { 0% { box-shadow: 0 0 0 0 rgba(29,78,216,.28), 0 18px 40px -18px rgba(15,23,42,.35); } 70%, 100% { box-shadow: 0 0 0 14px rgba(29,78,216,0), 0 18px 40px -18px rgba(15,23,42,.35); } }
+
+/* ===== Accent #E55B0F: calls to action and small highlights only ===== */
+.x-btn-blue, .btn-primary, .basketbtn { background: var(--c-accent); color: #fff; }
+.x-btn-blue:hover, .btn-primary:hover, .basketbtn:hover { background: var(--c-accent-2); color: #fff; box-shadow: 0 14px 30px -14px rgba(229, 91, 15, .65); }
+.basketbtn .count { color: var(--c-accent); }
+.x-btn-blue:focus-visible, .btn-primary:focus-visible, .basketbtn:focus-visible { outline: 3px solid rgba(229, 91, 15, .35); outline-offset: 2px; }
+/* small highlights */
+.x-eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent); flex: none; }
+.xh-proof svg { color: #ff9a5c; }
+.xq-addb { background: var(--c-accent); }
+.xq-badge.on b { background: var(--c-accent); }
+.xq-ov3 .xq-lf b, .xq-rail button.on span { color: var(--c-accent); }
+.xh-route.prime .x-link svg, .x-link:hover svg { color: var(--c-accent); }
